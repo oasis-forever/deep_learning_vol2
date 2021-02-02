@@ -1,11 +1,12 @@
 import unittest
+import numpy as np
 import sys
 sys.path.append("../lib")
 from vector import Vector
 
 class TestVector(unittest.TestCase):
     def setUp(self):
-        self.vector = Vector([1, 2, 3])
+        self.vector = Vector(np.array([1, 2, 3]))
 
     def test_get_class_name(self):
         self.assertEqual("<class 'numpy.ndarray'>", self.vector.get_class_name())
@@ -17,7 +18,7 @@ class TestVector(unittest.TestCase):
         self.assertEqual(1, self.vector.get_dim())
 
     def test_calc_inner_product(self):
-        self.assertEqual(32, self.vector.calc_inner_product([4, 5, 6]))
+        self.assertEqual(32, self.vector.calc_inner_product(np.array([4, 5, 6])))
 
 if __name__ == "__main__":
     unittest.main()

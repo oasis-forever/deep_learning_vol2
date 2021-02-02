@@ -1,8 +1,8 @@
 import numpy as np
 
 class Vector:
-    def __init__(self, arr):
-        self.x = np.array(arr)
+    def __init__(self, x):
+        self.x = x
 
     def get_class_name(self):
         return str(self.x.__class__)
