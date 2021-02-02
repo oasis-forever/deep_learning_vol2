@@ -24,3 +24,6 @@ class Matrix:
 
     def calc_array_broadcast(self, arr):
         return self.W * np.array(arr)
+
+    def calc_inner_product(self, arr):
+        return np.dot(self.W, arr)

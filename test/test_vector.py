@@ -16,5 +16,8 @@ class TestVector(unittest.TestCase):
     def test_get_dim(self):
         self.assertEqual(1, self.vector.get_dim())
 
+    def test_calc_inner_product(self):
+        self.assertEqual(32, self.vector.calc_inner_product([4, 5, 6]))
+
 if __name__ == "__main__":
     unittest.main()

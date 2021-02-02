@@ -42,5 +42,11 @@ class TestVector(unittest.TestCase):
             [40, 100, 180]
         ]), self.matrix.calc_array_broadcast([10, 20, 30]))
 
+    def test_calc_inner_product(self):
+        assert_array_equal(np.array([
+            [58, 64],
+            [139, 154]
+        ]), self.matrix.calc_inner_product([[7, 8], [9, 10], [11, 12]]))
+
 if __name__ == "__main__":
     unittest.main()

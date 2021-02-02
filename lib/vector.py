@@ -12,3 +12,6 @@ class Vector:
 
     def get_dim(self):
         return self.x.ndim
+
+    def calc_inner_product(self, y):
+        return np.dot(self.x, y)
