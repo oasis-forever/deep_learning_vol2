@@ -1,4 +1,6 @@
 import numpy as np
+import sys
+sys.path.append("./concerns")
 from affine import Affine
 from sigmoid import Sigmoid
 

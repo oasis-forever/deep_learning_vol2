@@ -2,6 +2,7 @@ import unittest
 import numpy as np
 import sys
 sys.path.append("../lib")
+sys.path.append("../lib/concerns")
 from two_layer_net import TwoLayerNet
 
 class TestTwoLayerNet(unittest.TestCase):
