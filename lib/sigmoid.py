@@ -3,6 +3,14 @@ import numpy as np
 class Sigmoid:
     def __init__(self):
         self.params = []
+        self.grads  = []
+        self.out    = None
 
     def forward(self, x):
-        return 1 / (1 + np.exp(-x))
+        out = 1 / (1 + np.exp(-x))
+        self.out = out
+        return out
+
+    def backward(self, dout):
+        dx = dout * (1.0 - self.out) * self.out
+        return dx

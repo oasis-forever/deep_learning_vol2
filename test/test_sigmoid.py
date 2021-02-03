@@ -9,7 +9,14 @@ class TestSigmoid(unittest.TestCase):
         self.sigmoid = Sigmoid()
 
     def test_forward(self):
-        self.assertEqual((10, 4), self.sigmoid.forward(np.random.randn(10, 4)).shape)
+        x = np.random.randn(10, 4)
+        self.assertEqual((10, 4), self.sigmoid.forward(x).shape)
+
+    def test_backward(self):
+        x = np.random.randn(10, 4)
+        self.sigmoid.forward(x)
+        dout = np.random.randn(10, 4)
+        self.assertEqual((10, 4), self.sigmoid.backward(dout).shape)
 
 if __name__ == "__main__":
     unittest.main()
