@@ -1,6 +1,5 @@
 import unittest
 import numpy as np
-from numpy.testing import assert_almost_equal
 import sys
 sys.path.append("../lib")
 sys.path.append("../lib/concerns")
