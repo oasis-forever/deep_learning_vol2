@@ -22,7 +22,7 @@ class TwoLayerNet:
             Affine(W2, b2)
         ]
         self.loss_layer = SoftMaxWithLoss()
-        # Integrate all heaviness and gradients in each list
+        # Integrate all weight and gradients in each list
         self.params = []
         self.grads = []
         for layer in self.layers:
