@@ -6,7 +6,7 @@ from spiral import *
 import matplotlib.pyplot as plt
 from two_layer_net import TwoLayerNet
 
-class Trainer:
+class TrainCustomLoop:
     def __init__(self, max_epoch, batch_size, hidden_size, learning_rate=1.0):
         #Hyper params
         self.max_epoch  = max_epoch
