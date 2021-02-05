@@ -12,7 +12,6 @@ class TestTrainer(unittest.TestCase):
 
     def test_shuffle_data(self):
         index, x, t = self.train_custom_loop._shuffle_data()
-        self.assertEqual((300,), index.shape)
         self.assertEqual((300, 2), x.shape)
         self.assertEqual((300, 3), t.shape)
 

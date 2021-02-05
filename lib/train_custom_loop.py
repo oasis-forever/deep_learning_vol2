@@ -27,7 +27,7 @@ class TrainCustomLoop:
         index = np.random.permutation(self.data_size)
         x = self.x[index]
         t = self.t[index]
-        return index, x, t
+        return x, t
 
     def _update_params_with_grads(self, batch_x, batch_t):
         loss = self.model.forward(batch_x, batch_t)
@@ -45,7 +45,7 @@ class TrainCustomLoop:
 
     def update(self):
         for epoch in range(self.max_epoch):
-            index, x, t = self._shuffle_data()
+            x, t = self._shuffle_data()
             for iters in range(self.max_iters):
                 batch_x = x[iters * self.batch_size: (iters + 1) * self.batch_size]
                 batch_t = t[iters * self.batch_size: (iters + 1) * self.batch_size]
