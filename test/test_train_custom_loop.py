@@ -34,8 +34,8 @@ class TestTrainer(unittest.TestCase):
 
     def test_save_plot_image(self):
         self.train_custom_loop.update()
-        self.train_custom_loop.save_plot_image("../img/train_plot.png")
-        self.assertEqual(True, path.exists("../img/train_plot.png"))
+        self.train_custom_loop.save_plot_image("../img/train_custom_loop_plot.png")
+        self.assertEqual(True, path.exists("../img/train_custom_loop_plot.png"))
 
     def test_save_dicision_boundary_image(self):
         self.train_custom_loop.update()
