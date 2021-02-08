@@ -3,7 +3,9 @@ import numpy as np
 from numpy.testing import assert_array_equal
 import sys
 sys.path.append("../lib")
+sys.path.append("../lib/concerns")
 from count_based_methods import CountBasedMethod
+from list_handler import uniq_list
 
 class TestCountBasedMethod(unittest.TestCase):
     def setUp(self):
@@ -37,6 +39,19 @@ class TestCountBasedMethod(unittest.TestCase):
             7: "."
         }, self.cbm.id_to_word)
 
+    def test_create_co_matrix(self):
+        self.cbm.preprocess()
+        vocab_size = len(uniq_list(self.cbm.corpus))
+        assert_array_equal(np.array([
+            [0, 1, 0, 0, 0, 0, 0, 0],
+            [1, 0, 1, 0, 0, 1, 1, 0],
+            [0, 1, 0, 1, 0, 0, 0, 0],
+            [0, 0, 1, 0, 1, 0, 0, 0],
+            [0, 0, 0, 1, 0, 1, 0, 0],
+            [0, 1, 0, 0, 1, 0, 0, 0],
+            [0, 1, 0, 0, 0, 0, 0, 1],
+            [0, 0, 0, 0, 0, 0, 1, 0]
+        ]), self.cbm.create_co_matrix(vocab_size))
 
 if __name__ == "__main__":
     unittest.main()
