@@ -10,13 +10,13 @@ class TestVector(unittest.TestCase):
         self.matrix = Matrix(np.array([[1, 2, 3], [4, 5, 6]]))
 
     def test_get_class_name(self):
-        self.assertEqual("<class 'numpy.ndarray'>", self.matrix.get_class_name())
+        self.assertEqual("<class 'numpy.ndarray'>", str(self.matrix.W.__class__))
 
     def test_get_shape(self):
-        self.assertEqual((2, 3), self.matrix.get_shape())
+        self.assertEqual((2, 3), self.matrix.W.shape)
 
     def test_get_dim(self):
-        self.assertEqual(2, self.matrix.get_dim())
+        self.assertEqual(2, self.matrix.W.ndim)
 
     def test_calc_sum(self):
         assert_array_equal(np.array([
