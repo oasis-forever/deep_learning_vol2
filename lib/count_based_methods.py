@@ -34,3 +34,9 @@ class CountBasedMethod:
                     right_word_id = self.corpus[right_index]
                     co_matrix[word_id, right_word_id] += 1
         return co_matrix
+
+    def cos_similarity(self, x, y, eps=1e-8):
+        nx = x / (np.sqrt(np.sum(x ** 2)) + eps)
+        ny = y / (np.sqrt(np.sum(y ** 2)) + eps)
+        similarity = np.dot(nx, ny)
+        return similarity

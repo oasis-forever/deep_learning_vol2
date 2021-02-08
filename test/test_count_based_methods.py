@@ -53,5 +53,13 @@ class TestCountBasedMethod(unittest.TestCase):
             [0, 0, 0, 0, 0, 0, 1, 0]
         ]), self.cbm.create_co_matrix(vocab_size))
 
+    def test_cos_similarity(self):
+        self.cbm.preprocess()
+        vocab_size = len(uniq_list(self.cbm.corpus))
+        co_matrix = self.cbm.create_co_matrix(vocab_size)
+        x = co_matrix[self.cbm.word_to_id["you"]]
+        y = co_matrix[self.cbm.word_to_id["i"]]
+        self.assertEqual(0.7071067691154799, self.cbm.cos_similarity(x, y))
+
 if __name__ == "__main__":
     unittest.main()
