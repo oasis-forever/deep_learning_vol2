@@ -16,7 +16,7 @@ class CountBasedMethod:
             return "%s is not found." % query
         query_id  = self.word_to_id[query]
         query_vec = self.co_matrix[query_id]
-        return "[query] {}".format(query), query_vec
+        return {"query": query}, query_vec
 
     def _cos_similarity(self, x, y, eps=1e-8):
         nx = x / (np.sqrt(np.sum(x ** 2)) + eps)
@@ -33,11 +33,11 @@ class CountBasedMethod:
 
     def _output_result_asc(self, similarity, query, top=5):
         count = 0
-        result = []
+        result = {}
         for i in (-1 * similarity).argsort():
             if self.id_to_word[i] == query:
                 continue
-            result.append("%s: %s" % (self.id_to_word[i], similarity[i]))
+            result[self.id_to_word[i]] = similarity[i]
             count += 1
             if count >= top:
                 return result
@@ -54,7 +54,7 @@ class CountBasedMethod:
 
     def create_co_matrix(self, vocab_size, windows_size=1):
         corpus_size = len(self.corpus)
-        self.co_matrix   = np.zeros((vocab_size, vocab_size), dtype=np.int32)
+        self.co_matrix = np.zeros((vocab_size, vocab_size), dtype=np.int32)
         for index, word_id in enumerate(self.corpus):
             for i in range(1, windows_size + 1):
                 left_index  = index - i
@@ -70,8 +70,5 @@ class CountBasedMethod:
         query_info, query_vec = self._take_out_query(query)
         similarity = self._calc_cos_similarity(query_vec)
         result = self._output_result_asc(similarity, query, top)
-        result.insert(0, query_info)
-        top_similarities = ""
-        for similarity in result:
-            top_similarities += "\n{}".format(similarity)
-        return top_similarities
+        query_info.update(result)
+        return query_info
