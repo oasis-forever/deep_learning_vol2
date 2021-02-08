@@ -3,16 +3,14 @@ import numpy as np
 from numpy.testing import assert_array_equal, assert_almost_equal
 import sys
 sys.path.append("../lib")
-sys.path.append("../lib/concerns")
 from count_based_methods import CountBasedMethod
-from list_handler import uniq_list
 
 class TestCountBasedMethod(unittest.TestCase):
     def setUp(self):
         text = "You said good-bye, and I said hello."
         self.cbm = CountBasedMethod(text)
         self.cbm.preprocess()
-        vocab_size = len(uniq_list(self.cbm.corpus))
+        vocab_size = len(self.word_to_id)
         self.cbm.create_co_matrix(vocab_size)
         self.query = "you"
 
