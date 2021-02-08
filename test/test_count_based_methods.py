@@ -10,7 +10,7 @@ class TestCountBasedMethod(unittest.TestCase):
         text = "You said good-bye, and I said hello."
         self.cbm = CountBasedMethod(text)
         self.cbm.preprocess()
-        vocab_size = len(self.word_to_id)
+        vocab_size = len(self.cbm.word_to_id)
         self.cbm.create_co_matrix(vocab_size)
         self.query = "you"
 
@@ -88,6 +88,18 @@ class TestCountBasedMethod(unittest.TestCase):
             'said': 0.0,
             ',': 0.0
         }, self.cbm.rank_similarities(self.query))
+
+    def test_ppmi(self):
+        assert_array_equal(np.array([
+            [0., 2., 0., 0., 0., 0., 0., 0.],
+            [2., 0., 1., 0., 0., 1., 1., 0.],
+            [0., 1., 0., 2., 0., 0., 0., 0.],
+            [0., 0., 2., 0., 2., 0., 0., 0.],
+            [0., 0., 0., 2., 0., 2., 0., 0.],
+            [0., 1., 0., 0., 2., 0., 0., 0.],
+            [0., 1., 0., 0., 0., 0., 0., 3.],
+            [0., 0., 0., 0., 0., 0., 3., 0.]
+        ]), self.cbm.ppmi())
 
 if __name__ == "__main__":
     unittest.main()

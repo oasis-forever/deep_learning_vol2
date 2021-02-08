@@ -72,3 +72,20 @@ class CountBasedMethod:
         result = self._output_result_asc(similarity, query, top)
         query_info.update(result)
         return query_info
+
+    # Positive Pointwise Mutual Information
+    def ppmi(self, verbose=False, eps=1e-8):
+        M = np.zeros_like(self.co_matrix, dtype=np.float32)
+        N = np.sum(self.co_matrix)
+        S = np.sum(self.co_matrix, axis=0)
+        total = self.co_matrix.shape[0] * self.co_matrix.shape[1]
+        count = 0
+        for i in range(self.co_matrix.shape[0]):
+            for j in range(self.co_matrix.shape[1]):
+                pmi = np.log2(self.co_matrix[i, j] * N / (S[j] * S[i]) + eps)
+                M[i, j] = max(0, pmi)
+                if verbose:
+                    count += 1
+                    if count % (total // 100) == 0:
+                        print("%.1f%% done" % (100 * count / total))
+        return M
