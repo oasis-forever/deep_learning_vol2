@@ -14,8 +14,8 @@ class TestCountBasedMethod(unittest.TestCase):
         self.assertEqual(["you", "said", "good-bye", ",", "and", "i", "said", "hello", "."], self.cbm.words)
 
     def test_preprocess(self):
-        corpus, word_to_id, id_to_word = self.cbm.preprocess()
-        assert_array_equal(np.array([0, 1, 2, 3, 4, 5, 1, 6, 7]), corpus)
+        self.cbm.preprocess()
+        assert_array_equal(np.array([0, 1, 2, 3, 4, 5, 1, 6, 7]), self.cbm.corpus)
         self.assertEqual({
             "you": 0,
             "said": 1,
@@ -25,7 +25,7 @@ class TestCountBasedMethod(unittest.TestCase):
             "i": 5,
             "hello": 6,
             ".": 7
-        }, word_to_id)
+        }, self.cbm.word_to_id)
         self.assertEqual({
             0: "you",
             1: "said",
@@ -35,7 +35,8 @@ class TestCountBasedMethod(unittest.TestCase):
             5: "i",
             6: "hello",
             7: "."
-        }, id_to_word)
+        }, self.cbm.id_to_word)
+
 
 if __name__ == "__main__":
     unittest.main()
