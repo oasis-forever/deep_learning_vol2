@@ -9,13 +9,13 @@ class TestVector(unittest.TestCase):
         self.vector = Vector(np.array([1, 2, 3]))
 
     def test_get_class_name(self):
-        self.assertEqual("<class 'numpy.ndarray'>", self.vector.get_class_name())
+        self.assertEqual("<class 'numpy.ndarray'>", str(self.vector.x.__class__))
 
     def test_get_shape(self):
-        self.assertEqual((3,), self.vector.get_shape())
+        self.assertEqual((3,), self.vector.x.shape)
 
     def test_get_dim(self):
-        self.assertEqual(1, self.vector.get_dim())
+        self.assertEqual(1, self.vector.x.ndim)
 
     def test_calc_inner_product(self):
         self.assertEqual(32, self.vector.calc_inner_product(np.array([4, 5, 6])))
