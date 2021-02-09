@@ -7,9 +7,9 @@ class CountBasedMethod:
         text = text.replace(".", " .")
         self.words = text.split(" ")
         self.corpus = None
-        self.word_to_id  = None
-        self.id_to_word  = None
-        self.co_matrix   = None
+        self.word_to_id = None
+        self.id_to_word = None
+        self.co_matrix  = None
 
     def _take_out_query(self, query):
         if query not in self.word_to_id:
