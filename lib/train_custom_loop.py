@@ -2,69 +2,65 @@ import numpy as np
 import sys
 sys.path.append("./concerns")
 from sgd import SGD
-from spiral import *
 import matplotlib.pyplot as plt
 from two_layer_net import TwoLayerNet
 
 class TrainCustomLoop:
-    def __init__(self, max_epoch, batch_size, hidden_size, learning_rate=1.0):
-        #Hyper params
-        self.max_epoch  = max_epoch
-        self.batch_size = batch_size
+    def __init__(self, input_size=2, hidden_size=10, output_size=3, learning_rate=1.0):
         # Generate model, optimiser
-        self.model      = TwoLayerNet(input_size=2, hidden_size=hidden_size, output_size=3)
-        self.optimizer  = SGD(lr=learning_rate)
-        # Load data
-        self.x, self.t  = load_data()
-        # Variables for training
-        self.data_size  = len(self.x)
-        self.max_iters  = self.data_size // batch_size
-        self.total_loss = 0
-        self.loss_count = 0
-        self.loss_list  = []
+        self.model     = TwoLayerNet(input_size, hidden_size, output_size)
+        self.optimizer = SGD(learning_rate)
 
-    def _shuffle_data(self):
-        index = np.random.permutation(self.data_size)
-        x = self.x[index]
-        t = self.t[index]
-        return x, t
+    def _shuffle_data(self, x, t):
+        data_size = len(x)
+        index = np.random.permutation(data_size)
+        xx = x[index]
+        tt = t[index]
+        return xx, tt
 
-    def _update_params_with_grads(self, batch_x, batch_t):
+    def _update_params_with_grads(self, batch_x, batch_t, total_loss, loss_count):
         loss = self.model.forward(batch_x, batch_t)
         self.model.backward()
         self.optimizer.update(self.model.params, self.model.grads)
-        self.total_loss += loss
-        self.loss_count += 1
+        return loss
 
-    def _learning_process(self, epoch, iters):
-        avarage_loss = self.total_loss / self.loss_count
-        self.loss_list.append(avarage_loss)
-        self.total_loss = 0
-        self.loss_count = 0
-        return "| epoch %d | iter %d / %d | loss %.2f" % (epoch + 1, iters + 1, self.max_iters, avarage_loss)
+    def _learning_process(self, total_loss, loss_count, epoch, iters, max_iters):
+        avarage_loss = total_loss / loss_count
+        process = "| epoch %d | iter %d / %d | loss %.2f" % (epoch + 1, iters + 1, max_iters, avarage_loss)
+        return avarage_loss, process
 
-    def update(self):
-        for epoch in range(self.max_epoch):
-            x, t = self._shuffle_data()
-            for iters in range(self.max_iters):
-                batch_x = x[iters * self.batch_size: (iters + 1) * self.batch_size]
-                batch_t = t[iters * self.batch_size: (iters + 1) * self.batch_size]
-                self._update_params_with_grads(batch_x, batch_t)
+    def update(self, x, t, max_epoch, batch_size):
+        data_size = len(x)
+        max_iters = data_size // batch_size
+        loss_list = []
+        total_loss = 0
+        loss_count = 0
+        for epoch in range(max_epoch):
+            xx, tt = self._shuffle_data(x, t)
+            for iters in range(max_iters):
+                batch_x = xx[iters * batch_size: (iters + 1) * batch_size]
+                batch_t = tt[iters * batch_size: (iters + 1) * batch_size]
+                loss = self._update_params_with_grads(batch_x, batch_t, total_loss, loss_count)
+                total_loss += loss
+                loss_count += 1
                 if (iters + 1) % 10 == 0:
-                    self._learning_process(epoch, iters)
+                    avarage_loss, *_ = self._learning_process(total_loss, loss_count, epoch, iters, max_iters)
+                    loss_list.append(avarage_loss)
+                    total_loss = 0
+                    loss_count = 0
+        return loss_list
 
-    def save_plot_image(self, path):
+    def save_plot_image(self, loss_list, path):
         plt.figure()
-        plt.plot(np.arange(len(self.loss_list)), self.loss_list, label='train')
+        plt.plot(np.arange(len(loss_list)), loss_list, label='train')
         plt.xlabel("iterations (x10)")
         plt.ylabel("loss")
         plt.savefig(path)
 
-    def save_dicision_boundary_image(self, path):
+    def save_dicision_boundary_image(self, x, t, path, h=0.001):
         # Plot boundary
-        h = 0.001
-        x_min, x_max = self.x[:, 0].min() - .1, self.x[:, 0].max() + .1
-        y_min, y_max = self.x[:, 1].min() - .1, self.x[:, 1].max() + .1
+        x_min, x_max = x[:, 0].min() - .1, x[:, 0].max() + .1
+        y_min, y_max = x[:, 1].min() - .1, x[:, 1].max() + .1
         xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
         X = np.c_[xx.ravel(), yy.ravel()]
         score = self.model._predict(X)
@@ -73,7 +69,6 @@ class TrainCustomLoop:
         plt.contourf(xx, yy, Z)
         plt.axis('off')
         # Plot data points
-        x, t = load_data()
         SAMPLE_NUMS_PER_CLASS = 100
         CLASS_NUNS = 3
         markers = ['o', 'x', '^']

@@ -6,7 +6,7 @@ def load_data(seed=1984):
     DATA_ELEM_NUMS = 2
     CLASS_NUNS = 3
     x = np.zeros((SAMPLE_NUMS_PER_CLASS * CLASS_NUNS, DATA_ELEM_NUMS))
-    t = np.zeros((SAMPLE_NUMS_PER_CLASS * CLASS_NUNS, CLASS_NUNS), dtype=np.int)
+    t = np.zeros((SAMPLE_NUMS_PER_CLASS * CLASS_NUNS, CLASS_NUNS), dtype=np.int32)
     for j in range(CLASS_NUNS):
         for i in range(SAMPLE_NUMS_PER_CLASS):
             rate = i / SAMPLE_NUMS_PER_CLASS
