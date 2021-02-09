@@ -7,13 +7,8 @@ from clip_grads import *
 
 class Trainer:
     def __init__(self, model, optimizer):
-        self.model         = model
-        self.optimizer     = optimizer
-        self.loss_list     = []
-        self.eval_interval = None
-        self.current_epoch = 0
-        self.total_loss    = 0
-        self.loss_count    = 0
+        self.model     = model
+        self.optimizer = optimizer
 
     def _shuffle_data(self, data_size, x, t):
         index = np.random.permutation(data_size)
@@ -57,25 +52,21 @@ class Trainer:
             if not find_flg: break
         return params, grads
 
-    def _update_params_with_grads(self, params, grads, loss):
-        self.optimizer.update(params, grads)
-        self.total_loss += loss
-        self.loss_count += 1
-
-    def _evaluate(self, start_time, iters, max_iters):
-        avarage_loss = self.total_loss / self.loss_count
+    def _evaluate(self, total_loss, loss_count, start_time, current_epoch, iters, max_iters):
+        avarage_loss = (total_loss / loss_count)
         elapsed_time = time.time() - start_time
-        self.loss_list.append(float(avarage_loss))
-        self.total_loss = 0
-        self.loss_count = 0
-        return "| epoch %d |  iter %d / %d | time %d[s] | loss %.2f" % (self.current_epoch + 1, iters + 1, max_iters, elapsed_time, avarage_loss)
+        training_status = "| epoch %d |  iter %d / %d | time %d[s] | loss %.2f" % (current_epoch + 1, iters + 1, max_iters, elapsed_time, avarage_loss)
+        return avarage_loss, training_status
 
     def fit(self, x, t, max_epoch=10, batch_size=32, max_grad=None, eval_interval=20):
+        total_loss = 0
+        loss_count = 0
         data_size = len(x)
         max_iters = data_size // batch_size
-        self.eval_interval = eval_interval
         start_time = time.time()
+        loss_list = []
         training_process = []
+        current_epoch = 0
         for epoch in range(max_epoch):
             xx, tt = self._shuffle_data(data_size, x, t)
             for iters in range(max_iters):
@@ -85,18 +76,24 @@ class Trainer:
                 params, grads = self._remove_duplicate()
                 if max_grad is not None:
                     clip_grads(grads, max_grad)
-                self._update_params_with_grads(params, grads, loss)
+                self.optimizer.update(params, grads)
+                total_loss += loss
+                loss_count += 1
                 if (eval_interval is not None) and (iters % eval_interval) == 0:
-                    training_process.append(self._evaluate(start_time, iters, max_iters))
-            self.current_epoch += 1
-        return training_process
+                    avarage_loss, training_status = self._evaluate(total_loss, loss_count, start_time, current_epoch, iters, max_iters)
+                    total_loss = 0
+                    loss_count = 0
+                    loss_list.append(avarage_loss)
+                    training_process.append(training_status)
+            current_epoch += 1
+        return loss_list, training_process
 
-    def save_plot_image(self, path, ylim=None):
+    def save_plot_image(self, loss_list, path, eval_interval=20, ylim=None):
         plt.figure()
-        x = np.arange(len(self.loss_list))
+        x = np.arange(len(loss_list))
         if ylim is not None:
             plt.ylim(*ylim)
-        plt.plot(x, self.loss_list, label="train")
-        plt.xlabel("iterations (x{})".format(str(self.eval_interval)))
+        plt.plot(x, loss_list, label="train")
+        plt.xlabel("iterations (x{})".format(str(eval_interval)))
         plt.ylabel("loss")
         plt.savefig(path)
