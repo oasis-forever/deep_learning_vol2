@@ -10,9 +10,9 @@ from count_based_methods import CountBasedMethod
 class TestCountBasedMethod(unittest.TestCase):
     def setUp(self):
         text = "You said good-bye and I said hello."
-        self.cbm = CountBasedMethod(text)
+        self.cbm = CountBasedMethod()
+        self.word_list = self.cbm.test_to_word_list(text)
         self.query = "you"
-        self.word_list = self.cbm.word_list(self.cbm.text)
         self.word_to_id, self.id_to_word, self.corpus = self.cbm.preprocess(self.word_list)
         self.vocab_size = len(self.word_to_id)
         self.co_matrix = self.cbm.create_co_matrix(self.corpus, self.vocab_size)
@@ -121,8 +121,9 @@ class TestCountBasedMethod(unittest.TestCase):
     def test_save_svd_plot_image(self):
         M = self.cbm.ppmi(self.co_matrix)
         U = self.cbm.singular_value_deconposition(M)
-        self.cbm.save_svd_plot_image(self.word_to_id, U, "../img/svd_plot.png")
-        self.assertEqual(True, path.exists("../img/svd_plot.png"))
+        path = "../img/svd_plot.png"
+        self.cbm.save_svd_plot_image(self.word_to_id, U, path)
+        self.assertEqual(True, path.exists(path))
 
 if __name__ == "__main__":
     unittest.main()

@@ -2,14 +2,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class CountBasedMethod:
-    def __init__(self, text):
+    def __init__(self):
+        pass
+
+    def test_to_word_list(self, text):
         text = text.lower()
         text = text.replace(",", " ,")
         text = text.replace(".", " .")
-        self.text = text
-
-    def word_list(self, text):
-        word_list = self.text.split(" ")
+        word_list = text.split(" ")
         return word_list
 
     def _take_out_query(self, query, word_to_id, co_matrix):
