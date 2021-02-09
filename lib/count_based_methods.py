@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 class CountBasedMethod:
     def __init__(self, text):
@@ -10,6 +11,8 @@ class CountBasedMethod:
         self.word_to_id = None
         self.id_to_word = None
         self.co_matrix  = None
+        self.M = None
+        self.U = None
 
     def _take_out_query(self, query):
         if query not in self.word_to_id:
@@ -75,7 +78,7 @@ class CountBasedMethod:
 
     # Positive Pointwise Mutual Information
     def ppmi(self, verbose=False, eps=1e-8):
-        M = np.zeros_like(self.co_matrix, dtype=np.float32)
+        self.M = np.zeros_like(self.co_matrix, dtype=np.float32)
         N = np.sum(self.co_matrix)
         S = np.sum(self.co_matrix, axis=0)
         total = self.co_matrix.shape[0] * self.co_matrix.shape[1]
@@ -83,9 +86,17 @@ class CountBasedMethod:
         for i in range(self.co_matrix.shape[0]):
             for j in range(self.co_matrix.shape[1]):
                 pmi = np.log2(self.co_matrix[i, j] * N / (S[j] * S[i]) + eps)
-                M[i, j] = max(0, pmi)
+                self.M[i, j] = max(0, pmi)
                 if verbose:
                     count += 1
                     if count % (total // 100) == 0:
                         print("%.1f%% done" % (100 * count / total))
-        return M
+
+    def singular_value_deconposition(self):
+        self.U, S, V = np.linalg.svd(self.M)
+
+    def save_svd_plot_image(self, path):
+        for word, word_id in self.word_to_id.items():
+            plt.annotate(word, (self.U[word_id, 0], self.U[word_id, 1]))
+        plt.scatter(self.U[:, 0], self.U[:, 1], alpha=0.5)
+        plt.savefig(path)
