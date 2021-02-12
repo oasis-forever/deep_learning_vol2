@@ -29,3 +29,19 @@ class TestWord2Vec(unittest.TestCase):
         ]), contexts_array)
         assert_array_equal(np.array([1, 2, 3, 4, 1, 5]), target_array)
 
+    def test_convert_to_one_hot(self):
+        vocab_size = len(self.word_to_id)
+        one_hot = self.simple_word2vec.convert_to_one_hot(self.corpus, vocab_size)
+        assert_array_equal(np.array([
+            [1, 0, 0, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0],
+            [0, 0, 0, 1, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0],
+            [0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 0, 0, 1]
+        ]), one_hot)
+
+if __name__ == "__main__":
+    unittest.main()

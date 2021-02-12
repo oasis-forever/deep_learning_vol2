@@ -17,3 +17,16 @@ class SimpleWord2Vec:
             contexts.append(cs)
         return np.array(contexts), np.array(target)
 
+    def convert_to_one_hot(self, corpus, vocab_size):
+        N = corpus.shape[0]
+        if corpus.ndim == 1:
+            one_hot = np.zeros((N, vocab_size), dtype=np.int32)
+            for index, word_id in enumerate(corpus):
+                one_hot[index, word_id] = 1
+        elif corpus.ndim == 2:
+            C = corpus.shape[1]
+            one_hot = np.zeros((N, C, vocab_size), dtype=np.int32)
+            for index_0, word_ids in enumerate(corpus):
+                for index_1, word_id in enumerate(word_ids):
+                    one_hot[index_0, index_1, word_id] = 1
+        return one_hot
