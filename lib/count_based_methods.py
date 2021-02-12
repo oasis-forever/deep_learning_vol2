@@ -5,7 +5,7 @@ class CountBasedMethod:
     def __init__(self):
         pass
 
-    def test_to_word_list(self, text):
+    def text_to_word_list(self, text):
         text = text.lower()
         text = text.replace(",", " ,")
         text = text.replace(".", " .")

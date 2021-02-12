@@ -11,7 +11,7 @@ class TestCountBasedMethod(unittest.TestCase):
     def setUp(self):
         text = "You said good-bye and I said hello."
         self.cbm = CountBasedMethod()
-        self.word_list = self.cbm.test_to_word_list(text)
+        self.word_list = self.cbm.text_to_word_list(text)
         self.query = "you"
         self.word_to_id, self.id_to_word, self.corpus = self.cbm.preprocess(self.word_list)
         self.vocab_size = len(self.word_to_id)
