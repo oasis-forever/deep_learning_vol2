@@ -3,7 +3,7 @@ import sys
 sys.path.append("./concerns")
 from affine import Affine
 from sigmoid import Sigmoid
-from soft_max_with_loss import SoftMaxWithLoss
+from softmax_with_loss import SoftMaxWithLoss
 
 class TwoLayerNet:
     def __init__(self, input_size, hidden_size, output_size):
