@@ -6,7 +6,7 @@ sys.path.append("../lib")
 from count_based_methods import CountBasedMethod
 from simple_word2vec import SimpleWord2Vec
 
-class TestWord2Vec(unittest.TestCase):
+class TestSimpleWord2Vec(unittest.TestCase):
     def setUp(self):
         text = "You said good-bye and I said hello."
         cbm = CountBasedMethod()
