@@ -29,3 +29,15 @@ trainer = Trainer(model, optimiser)
 
 loss_list, *_ = trainer.fit(contexts, target, max_epoch, batch_size)
 trainer.save_plot_image(loss_list, "../img/simple_cbow.png")
+
+word_vecs = model.word_vecs
+for word_id, word in id_to_word.items():
+    print(word, word_vecs[word_id])
+
+# you [-1.5536748   1.0079776   0.8196111  -1.272789   -0.95454085]
+# said [-0.05190767 -1.2171102  -1.194473    0.09074625  1.2775047 ]
+# good-bye [-0.14689542  1.1000649   1.2197245  -0.6324673  -0.9398135 ]
+# and [-1.5664533 -1.0271425 -1.0257705 -1.6203353  0.9738734]
+# i [-0.13537222  1.0609227   1.1996503  -0.63114583 -0.9183834 ]
+# hello [-1.547989    0.9937856   0.8378686  -1.2921431  -0.96555245]
+# . [ 1.4132981 -1.0603247 -1.049668   1.4127864  1.209216 ]
