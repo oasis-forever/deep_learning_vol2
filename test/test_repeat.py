@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 import sys
-sys.path.append("../lib")
+sys.path.append("../lib/concerns")
 from repeat import Repeat
 
 class TestRepeat(unittest.TestCase):

@@ -2,7 +2,7 @@ import unittest
 import numpy as np
 from numpy.testing import assert_array_equal, assert_almost_equal
 import sys
-sys.path.append("../lib")
+sys.path.append("../lib/concerns")
 import os.path
 from os import path
 from count_based_methods import CountBasedMethod
@@ -121,9 +121,9 @@ class TestCountBasedMethod(unittest.TestCase):
     def test_save_svd_plot_image(self):
         M = self.cbm.ppmi(self.co_matrix)
         U = self.cbm.singular_value_deconposition(M)
-        path = "../img/svd_plot.png"
-        self.cbm.save_svd_plot_image(self.word_to_id, U, path)
-        self.assertEqual(True, path.exists(path))
+        filepath = "../img/svd_plot.png"
+        self.cbm.save_svd_plot_image(self.word_to_id, U, filepath)
+        self.assertEqual(True, path.exists(filepath))
 
 if __name__ == "__main__":
     unittest.main()
