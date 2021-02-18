@@ -1,4 +1,6 @@
 import numpy as np
+import sys
+sys.path.append("../concerns")
 from softmax import *
 from cross_entropy_error import *
 

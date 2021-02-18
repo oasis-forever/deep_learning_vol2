@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-sys.path.append("./concerns")
+sys.path.append("../layers")
 from affine import Affine
 from sigmoid import Sigmoid
 from softmax_with_loss import SoftMaxWithLoss

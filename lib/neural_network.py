@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-sys.path.append("./concerns")
+sys.path.append("./layers")
 from sigmoid import Sigmoid
 
 class NeuralNetwork:
@@ -8,9 +8,6 @@ class NeuralNetwork:
         self.x = x
         self.W = W
         self.b = b
-
-    def _sigmoid(self, h):
-        return 1 / (1 + np.exp(-h))
 
     def get_hidden_layer(self):
         return np.dot(self.x, self.W) + self.b

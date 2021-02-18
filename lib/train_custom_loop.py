@@ -1,8 +1,9 @@
 import numpy as np
-import sys
-sys.path.append("./concerns")
-from sgd import SGD
 import matplotlib.pyplot as plt
+import sys
+sys.path.append("./models")
+sys.path.append("./optimisers")
+from sgd import SGD
 from two_layer_net import TwoLayerNet
 
 class TrainCustomLoop:

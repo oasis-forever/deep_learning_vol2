@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 import sys
-sys.path.append("../lib/concerns")
+sys.path.append("../lib/layers")
 from matmul import MatMul
 
 class TestMatMul(unittest.TestCase):

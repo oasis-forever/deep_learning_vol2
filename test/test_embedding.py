@@ -2,7 +2,7 @@ import unittest
 import numpy as np
 from numpy.testing import assert_array_equal
 import sys
-sys.path.append("../lib/concerns")
+sys.path.append("../lib/layers")
 from embedding import Embedding
 
 class TestEmbedding(unittest.TestCase):

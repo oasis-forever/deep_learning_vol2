@@ -1,9 +1,10 @@
 import unittest
 import numpy as np
-import sys
 from numpy.testing import assert_almost_equal
+import sys
 sys.path.append("../lib/concerns")
 from softmax_with_loss import SoftMaxWithLoss
+sys.path.append("../lib/layers")
 
 class TestSoftMaxWithLoss(unittest.TestCase):
     def setUp(self):

@@ -1,4 +1,6 @@
 import numpy as np
+import sys
+sys.path.append("./concerns")
 from count_based_methods import CountBasedMethod
 
 class SimpleWord2Vec:

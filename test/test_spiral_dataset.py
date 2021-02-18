@@ -1,10 +1,10 @@
 import unittest
-import sys
-sys.path.append("../lib")
-sys.path.append("../lib/concerns")
 import os.path
 from os import path
+import sys
+sys.path.append("../lib")
 from spiral_dataset import SpiralDataset
+sys.path.append("../lib/concerns")
 
 class TestSpiralDataset(unittest.TestCase):
     def setUp(self):

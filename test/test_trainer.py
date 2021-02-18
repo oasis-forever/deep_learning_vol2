@@ -1,16 +1,19 @@
 import unittest
-import sys
-sys.path.append("../lib")
-sys.path.append("../lib/concerns")
 import numpy as np
 from numpy.testing import assert_array_equal
 import time
 import os.path
 from os import path
-from two_layer_net import TwoLayerNet
-from sgd import SGD
-from spiral import *
+import sys
+sys.path.append("../lib")
 from trainer import Trainer
+sys.path.append("../lib/concerns")
+from spiral import *
+sys.path.append("../lib/layers")
+sys.path.append("../lib/models")
+from two_layer_net import TwoLayerNet
+sys.path.append("../lib/optimisers")
+from sgd import SGD
 
 class TestTrainer(unittest.TestCase):
     def setUp(self):
