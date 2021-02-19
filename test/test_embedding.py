@@ -11,7 +11,7 @@ class TestEmbedding(unittest.TestCase):
         self.embedding = Embedding(W)
 
     def test_params(self):
-        W, = self.embedding.params
+        params, = self.embedding.params
         assert_array_equal(np.array([
             [ 0,  1,  2],
             [ 3,  4,  5],
@@ -20,7 +20,7 @@ class TestEmbedding(unittest.TestCase):
             [12, 13, 14],
             [15, 16, 17],
             [18, 19, 20]
-       ]), W)
+       ]), params)
 
     def test_grads(self):
         grads, = self.embedding.grads
