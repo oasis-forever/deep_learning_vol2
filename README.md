@@ -2,7 +2,7 @@
 
 * WSL(Ubuntu 20.04.1 LTS (GNU/Linux 4.19.128-microsoft-standard x86_64))
 * pyenv 1.2.22-19-g569992f2
-* Python 3.8.6
+* Python 3.8.7
     * matplotlib 3.3.4
     * numpy 1.20.1
     * scikit-learn 0.24.1
