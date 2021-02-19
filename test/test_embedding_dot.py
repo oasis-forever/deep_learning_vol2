@@ -24,7 +24,7 @@ class TestEmbeddingDot(unittest.TestCase):
             [18, 19, 20]
        ]), params)
 
-    def test_grads(self):
+    def test_initial_grads(self):
         grads, = self.embedding_dot.grads
         assert_array_equal(np.array([
             [0, 0, 0],
@@ -75,6 +75,20 @@ class TestEmbeddingDot(unittest.TestCase):
             [366, 488, 610],
             [516, 602, 688]
         ]), self.embedding_dot.cache)
+
+    def test_grads(self):
+        dout = self.embedding_dot.forward(self.index, self.h)
+        self.embedding_dot.backward(dout)
+        grads, = self.embedding_dot.grads
+        assert_array_equal(np.array([
+            [  0,   5,  10],
+            [516, 602, 688],
+            [  0,   0,   0],
+            [366, 488, 610],
+            [  0,   0,   0],
+            [  0,   0,   0],
+            [  0,   0,   0]
+       ]), grads)
 
 if __name__ == "__main__":
     unittest.main()
