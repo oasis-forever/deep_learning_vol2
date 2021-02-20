@@ -10,12 +10,12 @@ class TestNegativeSamplingLoss(unittest.TestCase):
     def setUp(self):
         W = np.arange(21).reshape(7, 3)
         corpus = np.array([0, 1, 2, 3, 4, 1, 5, 2, 6])
-        self.negative_sampling_loss = NegativeSamplingLoss(W, corpus)
+        self.nsl = NegativeSamplingLoss(W, corpus)
         self.h = np.arange(3)
         self.target = np.array([1, 3, 0])
 
     def test_params(self):
-        param, *_ = self.negative_sampling_loss.params
+        param, *_ = self.nsl.params
         assert_array_equal(np.array([
             [ 0,  1,  2],
             [ 3,  4,  5],
@@ -26,8 +26,8 @@ class TestNegativeSamplingLoss(unittest.TestCase):
             [18, 19, 20]
         ]), param)
 
-    def test_grads(self):
-        grad, *_ = self.negative_sampling_loss.grads
+    def test_initial_grads(self):
+        grad, *_ = self.nsl.grads
         assert_array_equal(np.array([
             [0, 0, 0],
             [0, 0, 0],
@@ -39,17 +39,17 @@ class TestNegativeSamplingLoss(unittest.TestCase):
         ]), grad)
 
     def test_forward(self):
-        loss = self.negative_sampling_loss.forward(self.h, self.target)
+        loss = self.nsl.forward(self.h, self.target)
         self.assertEqual(True, 65 <= loss < 75)
 
     def test_backward(self):
-        self.negative_sampling_loss.forward(self.h, self.target)
-        dh = self.negative_sampling_loss.backward()
+        self.nsl.forward(self.h, self.target)
+        dh = self.nsl.backward()
         assert_array_equal(np.array([
-            [0. ,  1.61,  3.22],
-            [5. ,  6.67,  8.33],
-            [10., 11.67, 13.33]
-        ]), np.round(dh, decimals=2))
+            [0. ,  1.6,  3.3],
+            [5. ,  6.7,  8.3],
+            [10., 11.7, 13.3]
+        ]), np.round(dh, decimals=1))
 
 if __name__ == "__main__":
     unittest.main()
