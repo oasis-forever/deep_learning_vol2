@@ -8,7 +8,7 @@ class EmbeddingDot:
         self.grads     = self.embedding.grads
         self.cache     = None
 
-    def forward(self, index, h):
+    def forward(self, h, index):
         target_W = self.embedding.forward(index)
         out = np.sum(target_W * h, axis=1)
         self.cache = (h, target_W)

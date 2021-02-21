@@ -37,11 +37,11 @@ class TestEmbeddingDot(unittest.TestCase):
        ]), grads)
 
     def test_forward(self):
-        out = self.embedding_dot.forward(self.index, self.h)
+        out = self.embedding_dot.forward(self.h, self.index)
         assert_array_equal(np.array([5, 122, 86]), out)
 
     def test_h(self):
-        self.embedding_dot.forward(self.index, self.h)
+        self.embedding_dot.forward(self.h, self.index)
         h, *_ = self.embedding_dot.cache
         assert_array_equal(np.array([
             [0, 1, 2],
@@ -50,7 +50,7 @@ class TestEmbeddingDot(unittest.TestCase):
        ]), h)
 
     def test_target_W(self):
-        self.embedding_dot.forward(self.index, self.h)
+        self.embedding_dot.forward(self.h, self.index)
         *_, target_W = self.embedding_dot.cache
         assert_array_equal(np.array([
             [0,  1,  2],
@@ -59,7 +59,7 @@ class TestEmbeddingDot(unittest.TestCase):
         ]), target_W)
 
     def test_backward(self):
-        dout = self.embedding_dot.forward(self.index, self.h)
+        dout = self.embedding_dot.forward(self.h, self.index)
         dh = self.embedding_dot.backward(dout)
         assert_array_equal(np.array([
             [   0,    5,   10],
@@ -68,7 +68,7 @@ class TestEmbeddingDot(unittest.TestCase):
         ]), dh)
 
     def test_dtarget_W(self):
-        dout = self.embedding_dot.forward(self.index, self.h)
+        dout = self.embedding_dot.forward(self.h, self.index)
         self.embedding_dot.backward(dout)
         assert_array_equal(np.array([
             [  0,   5,  10],
@@ -77,7 +77,7 @@ class TestEmbeddingDot(unittest.TestCase):
         ]), self.embedding_dot.cache)
 
     def test_grads(self):
-        dout = self.embedding_dot.forward(self.index, self.h)
+        dout = self.embedding_dot.forward(self.h, self.index)
         self.embedding_dot.backward(dout)
         grads, = self.embedding_dot.grads
         assert_array_equal(np.array([
