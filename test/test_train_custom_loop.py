@@ -3,10 +3,10 @@ import os.path
 from os import path
 import sys
 sys.path.append("../lib")
-from train_custom_loop import TrainCustomLoop
 sys.path.append("../lib/concerns")
-from spiral import *
 sys.path.append("../lib/layers")
+from train_custom_loop import TrainCustomLoop
+from spiral import *
 
 class TestTrainer(unittest.TestCase):
     def setUp(self):

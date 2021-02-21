@@ -2,8 +2,8 @@ import unittest
 import numpy as np
 import sys
 sys.path.append("../lib")
-from neural_network import NeuralNetwork
 sys.path.append("../lib/layers")
+from neural_network import NeuralNetwork
 
 class TestNeuralNetwork(unittest.TestCase):
     def setUp(self):

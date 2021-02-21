@@ -4,11 +4,11 @@ from numpy.testing import assert_array_equal
 import copy
 import sys
 sys.path.append("../lib")
+sys.path.append("../lib/concerns")
+sys.path.append("../lib/layers")
 from simple_cbow import SimpleCBOW
 from simple_word2vec import SimpleWord2Vec
-sys.path.append("../lib/concerns")
 from count_based_methods import CountBasedMethod
-sys.path.append("../lib/layers")
 
 class TestSimpleCBOW(unittest.TestCase):
     def setUp(self):

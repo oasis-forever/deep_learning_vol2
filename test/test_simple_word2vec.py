@@ -3,8 +3,8 @@ import numpy as np
 from numpy.testing import assert_array_equal
 import sys
 sys.path.append("../lib")
-from simple_word2vec import SimpleWord2Vec
 sys.path.append("../lib/concerns")
+from simple_word2vec import SimpleWord2Vec
 from count_based_methods import CountBasedMethod
 
 class TestSimpleWord2Vec(unittest.TestCase):

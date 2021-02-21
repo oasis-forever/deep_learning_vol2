@@ -6,13 +6,13 @@ import os.path
 from os import path
 import sys
 sys.path.append("../lib")
-from trainer import Trainer
 sys.path.append("../lib/concerns")
-from spiral import *
 sys.path.append("../lib/layers")
 sys.path.append("../lib/models")
-from two_layer_net import TwoLayerNet
 sys.path.append("../lib/optimisers")
+from trainer import Trainer
+from spiral import *
+from two_layer_net import TwoLayerNet
 from sgd import SGD
 
 class TestTrainer(unittest.TestCase):

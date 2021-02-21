@@ -3,8 +3,8 @@ import os.path
 from os import path
 import sys
 sys.path.append("../lib")
-from spiral_dataset import SpiralDataset
 sys.path.append("../lib/concerns")
+from spiral_dataset import SpiralDataset
 
 class TestSpiralDataset(unittest.TestCase):
     def setUp(self):
