@@ -26,7 +26,7 @@ class TestSimpleCBOW(unittest.TestCase):
 
     def test_forward(self):
         loss = self.simple_cbow.forward(self.contexts, self.target)
-        self.assertEqual(1.946, float("{:.3f}".format(loss)))
+        self.assertEqual(1.946, round(loss, 3))
 
     def test_params_diff(self):
         before_in_params_0, = self.simple_cbow.in_layer_0.params
