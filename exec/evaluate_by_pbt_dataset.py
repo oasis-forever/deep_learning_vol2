@@ -1,7 +1,6 @@
 import numpy as np
 from sklearn.utils.extmath import randomized_svd
 import sys
-sys.path.append("../lib")
 sys.path.append("../lib/concerns")
 from count_based_methods import CountBasedMethod
 from ptb import *
