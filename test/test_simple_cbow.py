@@ -6,6 +6,7 @@ import sys
 sys.path.append("../lib")
 sys.path.append("../lib/concerns")
 sys.path.append("../lib/layers")
+sys.path.append("../lib/models")
 from simple_cbow import SimpleCBOW
 from simple_word2vec import SimpleWord2Vec
 from count_based_methods import CountBasedMethod
