@@ -16,7 +16,6 @@ from ptb import *
 window_size = 5
 hidden_size = 100
 batch_size  = 100
-max_epoch   = 10
 
 # Load data
 corpus, word_to_id, id_to_word = load_data("train")
@@ -30,7 +29,7 @@ optimiser = Adam()
 trainer = Trainer(model, optimiser)
 
 # Initialize training
-loss_list = trainer.fit(contexts, target, max_epoch, batch_size)
+loss_list, *_ = trainer.fit(contexts, target, batch_size)
 trainer.save_plot_image(loss_list, "../img/cbow.png")
 
 # Store data to later use
