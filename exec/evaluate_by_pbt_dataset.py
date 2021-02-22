@@ -17,36 +17,36 @@ print("=== Counting PPMI... ===")
 W = cbm.ppmi(C, verbose=True)
 print("=== Counting SVD... ===")
 
-U, S, V = randomized_svd(W, n_components=wordvec_size, n_iter=5, random_state=None)
+U, *_ = randomized_svd(W, n_components=wordvec_size, n_iter=5, random_state=None)
 word_vecs = U[:, :wordvec_size]
 queries = ["you", "year", "car", "toyota"]
 for query in queries:
-    rankings = cbm.rank_similarities(query, word_to_id, C, vocab_size, id_to_word, top=5)
+    rankings = cbm.rank_similarities(query, word_to_id, word_vecs, vocab_size, id_to_word, top=5)
     for key, value in rankings.items():
         print("{}: {}".format(key, value))
 
 # === Counting SVD... ===
 # query: you
-# we: 0.9116863472995592
-# they: 0.8687462666080521
-# i: 0.857361903092406
-# even: 0.7934489247137608
-# yet: 0.7850673266737476
+# i: 0.6887015700340271
+# we: 0.5981300473213196
+# anybody: 0.5459755659103394
+# someone: 0.5337914228439331
+# something: 0.5205026865005493
 # query: year
-# month: 0.8660054601685736
-# week: 0.8476962513226234
-# takeover: 0.7930927044318773
-# minute: 0.7895400071124805
-# summer: 0.7846384776496734
+# month: 0.6476309299468994
+# last: 0.6352840065956116
+# quarter: 0.6196337342262268
+# earlier: 0.6139485239982605
+# february: 0.583666980266571
 # query: car
-# network: 0.8748470217247031
-# job: 0.8738000141474135
-# group: 0.8712132959805281
-# computer: 0.8702398991934865
-# strategy: 0.8667959840653632
+# auto: 0.5915555357933044
+# luxury: 0.5840224623680115
+# cars: 0.5550234913825989
+# vehicle: 0.5241951942443848
+# corsica: 0.4947493076324463
 # query: toyota
-# mazda: 0.813704553877644
-# ford: 0.8025722471765365
-# steel: 0.747693991788531
-# sony: 0.729440689959903
-# hess: 0.72874660684582
+# motor: 0.6898075938224792
+# motors: 0.6563531756401062
+# nissan: 0.6416055560112
+# lexus: 0.5842021703720093
+# honda: 0.5786799192428589
