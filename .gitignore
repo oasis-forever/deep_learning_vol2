@@ -1,3 +1,4 @@
+exec/cbow_params.pkl
 lib/__pycache__
 lib/concerns/__pycache__
 lib/layers/__pycache__
