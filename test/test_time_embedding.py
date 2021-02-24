@@ -27,24 +27,7 @@ class TestTimeEmbedding(unittest.TestCase):
         out = self.time_embedding.forward(self.xs)
         self.assertEqual((2, 4, 3), out.shape)
 
-    def test_params(self):
-        _params, = self.time_embedding.params
-        before_params = copy.copy(_params)
-        dout = self.time_embedding.forward(self.xs)
-        self.time_embedding.backward(dout)
-        after_params, = self.time_embedding.params
-        params = before_params == after_params
-        assert_array_equal(np.array([
-            [ True,  True,  True],
-            [ True,  True,  True],
-            [ True,  True,  True],
-            [ True,  True,  True],
-            [ True,  True,  True],
-            [ True,  True,  True],
-            [ True,  True,  True]
-        ]), params)
-
-    def test_grads(self):
+    def test_grads_diff(self):
         _grads, = self.time_embedding.grads
         before_grads = copy.copy(_grads)
         dout = self.time_embedding.forward(self.xs)

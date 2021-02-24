@@ -29,45 +29,6 @@ class TestSimpleCBOW(unittest.TestCase):
         loss = self.simple_cbow.forward(self.contexts, self.target)
         self.assertEqual(1.946, round(loss, 3))
 
-    def test_params_diff(self):
-        before_in_params_0, = self.simple_cbow.in_layer_0.params
-        before_in_params_0  = copy.copy(before_in_params_0)
-        before_in_params_1, = self.simple_cbow.in_layer_1.params
-        before_in_params_1  = copy.copy(before_in_params_1)
-        before_out_params,  = self.simple_cbow.out_layer.params
-        before_out_params   = copy.copy(before_out_params)
-        self.simple_cbow.forward(self.contexts, self.target)
-        self.simple_cbow.backward()
-        after_in_params_0, = self.simple_cbow.in_layer_0.params
-        after_in_params_1, = self.simple_cbow.in_layer_1.params
-        after_out_params,  = self.simple_cbow.out_layer.params
-        in_params_0 = before_in_params_0 == after_in_params_0
-        in_params_1 = before_in_params_1 == after_in_params_1
-        out_params  = before_out_params == after_out_params
-        assert_array_equal(np.array([
-            [ True,  True,  True],
-            [ True,  True,  True],
-            [ True,  True,  True],
-            [ True,  True,  True],
-            [ True,  True,  True],
-            [ True,  True,  True],
-            [ True,  True,  True]
-        ]), in_params_0)
-        assert_array_equal(np.array([
-            [ True,  True,  True],
-            [ True,  True,  True],
-            [ True,  True,  True],
-            [ True,  True,  True],
-            [ True,  True,  True],
-            [ True,  True,  True],
-            [ True,  True,  True]
-        ]), in_params_1)
-        assert_array_equal(np.array([
-            [ True,  True,  True,  True,  True,  True,  True],
-            [ True,  True,  True,  True,  True,  True,  True],
-            [ True,  True,  True,  True,  True,  True,  True]
-        ]), out_params)
-
     def test_grads_diff(self):
         before_in_grads_0, = self.simple_cbow.in_layer_0.grads
         before_in_grads_0  = copy.copy(before_in_grads_0)

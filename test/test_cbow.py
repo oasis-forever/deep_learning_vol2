@@ -28,38 +28,6 @@ class TestSimpleCBOW(unittest.TestCase):
         loss = self.cbow.forward(self.contexts, self.target)
         self.assertEqual(4.159, round(loss, 3))
 
-    def test_params_diff(self):
-        in_layer, *_ = self.cbow.in_layers
-        before_in_layer_param, = in_layer.params
-        before_in_layer_param = copy.copy(before_in_layer_param)
-        before_ns_loss_layer_param, *_ = self.cbow.ns_loss_layer.params
-        before_ns_loss_layer_param = copy.copy(before_ns_loss_layer_param)
-        self.cbow.forward(self.contexts, self.target)
-        self.cbow.backward()
-        in_layer, *_ = self.cbow.in_layers
-        after_in_layer_param, = in_layer.params
-        after_ns_loss_layer_param, *_ = self.cbow.ns_loss_layer.params
-        in_layer_param = before_in_layer_param == after_in_layer_param
-        ns_loss_layer_param = before_ns_loss_layer_param == after_ns_loss_layer_param
-        assert_array_equal(np.array([
-            [ True,  True],
-            [ True,  True],
-            [ True,  True],
-            [ True,  True],
-            [ True,  True],
-            [ True,  True],
-            [ True,  True]
-        ]), in_layer_param)
-        assert_array_equal(np.array([
-            [ True,  True],
-            [ True,  True],
-            [ True,  True],
-            [ True,  True],
-            [ True,  True],
-            [ True,  True],
-            [ True,  True]
-        ]), ns_loss_layer_param)
-
     def test_grads_diff(self):
         in_layer, *_ = self.cbow.in_layers
         before_in_layer_grad, = in_layer.grads
