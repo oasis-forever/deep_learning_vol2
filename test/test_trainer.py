@@ -34,7 +34,7 @@ class TestTrainer(unittest.TestCase):
         batch_x = xx[1 * batch_size: (1 + 1) * batch_size]
         batch_t = tt[1 * batch_size: (1 + 1) * batch_size]
         loss = self.trainer._calculate_loss(batch_x, batch_t)
-        self.assertEqual(1.1, float("{:.1f}".format(loss)))
+        self.assertEqual(1.1, round(loss, 1))
 
     def test_remove_duplicate(self):
         batch_size = 32
