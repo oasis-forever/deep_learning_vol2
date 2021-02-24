@@ -47,4 +47,4 @@ class TimeRNN:
         for i, grad in enumerate(grads):
             self.grads[i][...] = grad
         self.dh = dh
-        return dh
+        return dxs
