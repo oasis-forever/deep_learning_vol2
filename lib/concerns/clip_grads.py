@@ -1,3 +1,5 @@
+import numpy as np
+
 def clip_grads(grads, max_norm):
     total_norm = 0
     for grad in grads:
