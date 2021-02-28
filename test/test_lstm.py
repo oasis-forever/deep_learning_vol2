@@ -1,6 +1,7 @@
 import unittest
 import numpy as np
-from numpy.testing import assert_almost_equal
+from numpy.testing import assert_array_equal, assert_almost_equal
+import copy
 import sys
 sys.path.append("../lib/concerns")
 sys.path.append("../lib/layers")
@@ -174,6 +175,64 @@ class TestLSTM(unittest.TestCase):
             [-4.54490114e-01,  9.55363471e-04, -8.84788951e-03],
             [ 1.32898508e-01, -6.72948492e-01,  1.87992760e-01]
         ]), dc_prev)
+
+    def test_grads_diff(self):
+        _before_Wx_grads, _before_Wh_grads, _before_b_grads = self.lstm.grads
+        before_Wx_grads = copy.copy(_before_Wx_grads)
+        before_Wh_grads = copy.copy(_before_Wh_grads)
+        before_b_grads  = copy.copy(_before_b_grads)
+        dc_next, dh_next = self.lstm.forward(self.x, self.h_prev, self.c_prev)
+        self.lstm.backward(dc_next, dh_next)
+        after_Wx_grads, after_Wh_grads, after_b_grads = self.lstm.grads
+        Wx_grads = before_Wx_grads == after_Wx_grads
+        Wh_grads = before_Wh_grads == after_Wh_grads
+        b_grads  = before_b_grads == after_b_grads
+        assert_array_equal(np.array([
+            [
+                False, False, False,
+                False, False, False,
+                False, False, False,
+                False, False, False
+            ],
+            [
+                False, False, False,
+                False, False, False,
+                False, False, False,
+                False, False, False
+            ],
+            [
+                False, False, False,
+                False, False, False,
+                False, False, False,
+                False, False, False
+            ]
+        ]), Wx_grads)
+        assert_array_equal(np.array([
+            [
+                False, False, False,
+                False, False, False,
+                False, False, False,
+                False, False, False
+            ],
+            [
+                False, False, False,
+                False, False, False,
+                False, False, False,
+                False, False, False
+            ],
+            [
+                False, False, False,
+                False, False, False,
+                False, False, False,
+                False, False, False
+            ]
+        ]), Wh_grads)
+        assert_array_equal(np.array([
+            False, False, False,
+            False, False, False,
+            False, False, False,
+            False, False, False
+        ]), b_grads)
 
 if __name__ == "__main__":
     unittest.main()
