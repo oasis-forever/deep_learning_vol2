@@ -18,7 +18,8 @@ class TestVector(unittest.TestCase):
         self.assertEqual(1, self.vector.x.ndim)
 
     def test_calc_inner_product(self):
-        self.assertEqual(32, self.vector.calc_inner_product(np.array([4, 5, 6])))
+        inner_product = self.vector.calc_inner_product(np.array([4, 5, 6]))
+        self.assertEqual(32, inner_product)
 
 if __name__ == "__main__":
     unittest.main()

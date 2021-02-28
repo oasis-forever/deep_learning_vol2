@@ -3,7 +3,6 @@ import numpy as np
 from numpy.testing import assert_array_equal, assert_almost_equal
 import copy
 import sys
-sys.path.append("../lib/concerns")
 sys.path.append("../lib/layers")
 from lstm import LSTM
 

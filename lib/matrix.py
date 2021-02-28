@@ -5,16 +5,21 @@ class Matrix:
         self.W = W
 
     def calc_sum(self, X):
-        return self.W + X
+        sum = self.W + X
+        return sum
 
     def calc_product(self, X):
-        return self.W * X
+        product = self.W * X
+        return product
 
     def calc_scala_broadcast(self, num):
-        return self.W * num
+        scala_broadcast = self.W * num
+        return scala_broadcast
 
     def calc_array_broadcast(self, X):
-        return self.W * X
+        array_broadcast = self.W * X
+        return array_broadcast
 
     def calc_inner_product(self, X):
-        return np.dot(self.W, X)
+        inner_product = np.dot(self.W, X)
+        return inner_product

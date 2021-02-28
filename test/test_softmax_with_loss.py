@@ -23,16 +23,18 @@ class TestSoftMaxWithLoss(unittest.TestCase):
         ])
 
     def test_forward(self):
-        self.assertEqual(0.5879459780961449, self.softmax_with_loss.forward(self.x, self.t))
+        loss = self.softmax_with_loss.forward(self.x, self.t)
+        self.assertEqual(0.5879459780961449, loss)
 
     def test_backward(self):
         self.softmax_with_loss.forward(self.x, self.t)
+        dx = self.softmax_with_loss.backward()
         assert_almost_equal(np.array([
             [ 0.00668465, -0.06224663,  0.0260615 ,  0.02950047],
             [ 0.04142029,  0.06316393,  0.01311583, -0.11770004],
             [ 0.04700427, -0.14680577,  0.03139707,  0.06840443],
             [ 0.0736796 , -0.10492584,  0.01233183,  0.01891441]
-        ]), self.softmax_with_loss.backward())
+        ]), dx)
 
 if __name__ == "__main__":
     unittest.main()

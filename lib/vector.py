@@ -5,4 +5,5 @@ class Vector:
         self.x = x
 
     def calc_inner_product(self, y):
-        return np.dot(self.x, y)
+        inner_product = np.dot(self.x, y)
+        return inner_product

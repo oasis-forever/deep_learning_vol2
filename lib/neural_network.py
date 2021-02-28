@@ -10,9 +10,11 @@ class NeuralNetwork:
         self.b = b
 
     def get_hidden_layer(self):
-        return np.dot(self.x, self.W) + self.b
+        h = np.dot(self.x, self.W) + self.b
+        return h
 
     def get_output_layer(self, h):
         sigmoid = Sigmoid()
         a = sigmoid.forward(h)
-        return np.dot(a, self.W) + self.b
+        out = np.dot(a, self.W) + self.b
+        return out

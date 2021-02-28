@@ -1,13 +1,13 @@
 import numpy as np
 import sys
-sys.path.append("../concerns")
-from sigmoid import *
+from sigmoid import Sigmoid
 
 class LSTM:
     def __init__(self, Wx, Wh, b):
         self.params = [Wx, Wh, b]
         self.grads  = [np.zeros_like(Wx), np.zeros_like(Wh), np.zeros_like(b)]
         self.cache  = None
+        self.sigmoid = Sigmoid()
 
     def _slice(self, A, H):
         f = A[:, :H]
@@ -21,10 +21,10 @@ class LSTM:
         N, H = h_prev.shape
         A = np.dot(x, Wx) + np.dot(h_prev, Wh) + b
         f, g, i, o = self._slice(A, H)
-        f = sigmoid(f)
+        f = self.sigmoid.forward(f)
         g = np.tanh(g)
-        i = sigmoid(i)
-        o = sigmoid(o)
+        i = self.sigmoid.forward(i)
+        o = self.sigmoid.forward(o)
         c_next = f * c_prev + g * i
         h_next = o * np.tanh(c_next)
         self.cache = (x, h_prev, c_prev, (i, f, g, o), c_next)

@@ -14,14 +14,17 @@ class TestTwoLayerNet(unittest.TestCase):
         self.t = np.random.randn(4, 3)
 
     def test_predict(self):
-        self.assertEqual((4, 3), self.two_layer_net._predict(self.x).shape)
+        x = self.two_layer_net._predict(self.x)
+        self.assertEqual((4, 3), x.shape)
 
     def test_forward(self):
-        self.assertEqual(1, int(self.two_layer_net.forward(self.x, self.t)))
+        loss = self.two_layer_net.forward(self.x, self.t)
+        self.assertEqual(1, int(loss))
 
     def test_backward(self):
         self.two_layer_net.forward(self.x, self.t)
-        self.assertEqual((4, 2), self.two_layer_net.backward().shape)
+        dout = self.two_layer_net.backward()
+        self.assertEqual((4, 2), dout.shape)
 
 if __name__ == "__main__":
     unittest.main()

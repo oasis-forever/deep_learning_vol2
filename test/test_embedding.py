@@ -9,6 +9,7 @@ class TestEmbedding(unittest.TestCase):
     def setUp(self):
         W = np.arange(21).reshape(7, 3)
         self.embedding = Embedding(W)
+        self.index = np.array([0, 2, 0, 4])
 
     def test_params(self):
         params, = self.embedding.params
@@ -35,8 +36,7 @@ class TestEmbedding(unittest.TestCase):
        ]), grads)
 
     def test_forward(self):
-        index = np.array([0, 2, 0, 4])
-        out = self.embedding.forward(index)
+        out = self.embedding.forward(self.index)
         assert_array_equal(np.array([
             [ 0,  1,  2],
             [ 6,  7,  8],
@@ -45,8 +45,7 @@ class TestEmbedding(unittest.TestCase):
        ]), out)
 
     def test_backward(self):
-        index = np.array([0, 2, 0, 4])
-        dout = self.embedding.forward(index)
+        dout = self.embedding.forward(self.index)
         self.embedding.backward(dout)
         grads, = self.embedding.grads
         assert_array_equal(np.array([
