@@ -32,8 +32,8 @@ class LSTM:
 
     def backward(self, dh_next, dc_next):
         Wx, Wh, b = self.params
-        x, h_prev, c_prev, A, c_next = self.cache
-        i, f, g, o = A
+        x, h_prev, c_prev, gates, c_next = self.cache
+        i, f, g, o = gates
         tanh_c_next = np.tanh(c_next)
         ds = dc_next + (dh_next * o) * (1 - tanh_c_next ** 2)
         dc_prev = ds * f
