@@ -28,10 +28,10 @@ class TestRNNLMTrainer(unittest.TestCase):
         self.ts = corpus[1:]
         model = SimpleRNNLM(vocab_size, wordvec_size, hidden_size)
         optimiser = SGD(learning_rate)
-        self.rnn_trainer = RnnlmTrainer(model, optimiser)
+        self.rnnlm_trainer = RNNLMTrainer(model, optimiser)
 
     def test_get_batch(self):
-        batch_x, batch_t = self.rnn_trainer._get_batch(self.xs, self.ts, self.batch_size, self.time_size)
+        batch_x, batch_t = self.rnnlm_trainer._get_batch(self.xs, self.ts, self.batch_size, self.time_size)
         assert_array_equal(np.array([
             [  0,   1,   2,   3,   4],
             [ 42,  76,  77,  64,  78],
@@ -58,12 +58,12 @@ class TestRNNLMTrainer(unittest.TestCase):
         ]), batch_t)
 
     def test_fit(self):
-        training_process = self.rnn_trainer.fit(self.xs, self.ts, self.max_epoch, self.batch_size, self.time_size)
+        training_process = self.rnnlm_trainer.fit(self.xs, self.ts, self.max_epoch, self.batch_size, self.time_size)
         self.assertEqual(100, len(training_process))
 
     def test_save_plot_image(self):
-        self.rnn_trainer.fit(self.xs, self.ts, self.max_epoch, self.batch_size, self.time_size)
-        self.rnn_trainer.save_plot_image("../img/rnnlm_trainer.png")
+        self.rnnlm_trainer.fit(self.xs, self.ts, self.max_epoch, self.batch_size, self.time_size)
+        self.rnnlm_trainer.save_plot_image("../img/rnnlm_trainer.png")
         self.assertEqual(True, path.exists("../img/rnnlm_trainer.png"))
 
 if __name__ == "__main__":
