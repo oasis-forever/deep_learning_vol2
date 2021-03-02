@@ -3,7 +3,7 @@ import sys
 sys.path.append("../lib/concerns")
 from count_based_methods import CountBasedMethod
 
-pkl_file = "./cbow_params.pkl"
+pkl_file = "../pkl/cbow_params.pkl"
 
 with open(pkl_file, "rb") as f:
     params = pickle.load(f)

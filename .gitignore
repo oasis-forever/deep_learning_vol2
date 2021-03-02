@@ -7,3 +7,4 @@ lib/optimisers/__pycache__
 lib/concerns/ptb.train.npy
 lib/concerns/ptb.train.txt
 lib/concerns/ptb.vocab.pkl
+pkl/*
