@@ -34,10 +34,14 @@ class SimpleRNNLM:
             self.params += layer.params
             self.grads  += layer.grads
 
-    def forward(self, xs, ts):
+    def _predict(self, xs):
         for layer in self.layers:
             xs = layer.forward(xs)
-        loss = self.loss_layer.forward(xs, ts)
+        return xs
+
+    def forward(self, xs, ts):
+        score = self._predict(xs)
+        loss = self.loss_layer.forward(score, ts)
         return loss
 
     def backward(self, dout=1):

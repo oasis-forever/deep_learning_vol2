@@ -26,6 +26,10 @@ class TestSimpleRNNLM(unittest.TestCase):
             [0, 0, 0, 1]
         ])
 
+    def test_predict(self):
+        score = self.simple_rnnlm._predict(self.xs)
+        self.assertEqual((2, 4, 7), score.shape)
+
     def test_forward(self):
         loss = self.simple_rnnlm.forward(self.xs, self.ts)
         self.assertEqual(1.95, round(loss, 2))
