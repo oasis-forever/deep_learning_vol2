@@ -3,7 +3,7 @@ import time
 import matplotlib.pyplot as plt
 from clip_grads import *
 
-class RnnlmTrainer:
+class RNNLMTrainer:
     def __init__(self, model, optimizer):
         self.model         = model
         self.optimizer     = optimizer

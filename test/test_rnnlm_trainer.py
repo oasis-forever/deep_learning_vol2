@@ -7,12 +7,12 @@ import sys
 sys.path.append("../lib")
 sys.path.append("../lib/concerns")
 sys.path.append("../lib/optimisers")
-from rnn_trainer import RnnlmTrainer
+from rnnlm_trainer import RNNLMTrainer
 from simple_rnnlm import SimpleRNNLM
 from ptb import *
 from sgd import SGD
 
-class TestRnnlmTrainer(unittest.TestCase):
+class TestRNNLMTrainer(unittest.TestCase):
     def setUp(self):
         self.batch_size = 10
         wordvec_size    = 100
