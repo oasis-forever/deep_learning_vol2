@@ -31,8 +31,8 @@ class TwoLayerNet:
 
     def _predict(self, x):
         for layer in self.layers:
-            score = layer.forward(x)
-        return score
+            x = layer.forward(x)
+        return x
 
     def forward(self, x, t):
         score = self._predict(x)
