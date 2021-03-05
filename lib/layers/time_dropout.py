@@ -6,13 +6,13 @@ class TimeDropout:
         self.grads  = []
         self.dropout_ratio = dropout_ratio
         self.mask = None
-        self.train_flg = True
+        self.train_flag = True
 
     def forward(self, xs):
-        if self.train_flg:
-            flg = np.random.rand(*xs.shape) > self.dropout_ratio
+        if self.train_flag:
+            flag = np.random.rand(*xs.shape) > self.dropout_ratio
             scale = 1 / (1.0 - self.dropout_ratio)
-            self.mask = flg.astype(np.float32) * scale
+            self.mask = flag.astype(np.float32) * scale
             return xs * self.mask
         else:
             return xs

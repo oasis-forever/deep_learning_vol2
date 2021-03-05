@@ -17,7 +17,7 @@ def eval_perplexity(model, corpus, batch_size=10, time_size=35):
                 xs[i, t] = corpus[(offset + t) % corpus_size]
                 ts[i, t] = corpus[(offset + t + 1) % corpus_size]
         try:
-            loss = model.forward(xs, ts, train_flg=False)
+            loss = model.forward(xs, ts, train_flag=False)
         except TypeError:
             loss = model.forward(xs, ts)
         total_loss += loss

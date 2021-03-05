@@ -20,7 +20,7 @@ class RNNLMTrainer:
         params = self.model.params[:]
         grads  = self.model.grads[:]
         while True:
-            find_flg = False
+            find_flag = False
             L = len(params)
             for i in range(0, L - 1):
                 for j in range(i + 1, L):
@@ -28,19 +28,19 @@ class RNNLMTrainer:
                     if params[i] is params[j]:
                         # Add gradient
                         grads[i] += grads[j]
-                        find_flg = True
+                        find_flag = True
                         params.pop(j)
                         grads.pop(j)
                     # In case of sharing heaviness as transpose list(weight typing)
                     elif params[i].ndim == 2 and params[j].ndim == 2 and \
                          params[i].T.shape == params[j].shape and np.all(params[i].T == params[j]):
                         grads[i] += grads[j].T
-                        find_flg = True
+                        find_flag = True
                         params.pop(j)
                         grads.pop(j)
-                    if find_flg: break
-                if find_flg: break
-            if not find_flg: break
+                    if find_flag: break
+                if find_flag: break
+            if not find_flag: break
         return params, grads
 
     def _get_batch(self, x, t, batch_size, time_size):
