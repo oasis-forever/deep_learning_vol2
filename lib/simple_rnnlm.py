@@ -46,10 +46,8 @@ class SimpleRNNLM:
 
     def backward(self, dout=1):
         dout = self.loss_layer.backward(dout)
-        dout_list = []
         for layer in reversed(self.layers):
             dout = layer.backward(dout)
-            dout_list.append(dout)
         return dout
 
     def reset_state(self):
