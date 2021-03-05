@@ -142,9 +142,9 @@ class TestCountBasedMethod(unittest.TestCase):
     def test_save_svd_plot_image(self):
         M = self.cbm.ppmi(self.co_matrix)
         U = self.cbm.singular_value_deconposition(M)
-        filepath = "../img/svd_plot.png"
-        self.cbm.save_svd_plot_image(self.word_to_id, U, filepath)
-        self.assertEqual(True, path.exists(filepath))
+        file_path = "../img/svd_plot.png"
+        self.cbm.save_svd_plot_image(self.word_to_id, U, file_path)
+        self.assertEqual(True, path.exists(file_path))
 
 if __name__ == "__main__":
     unittest.main()

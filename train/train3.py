@@ -30,7 +30,8 @@ trainer = Trainer(model, optimiser)
 
 # Initialize training
 loss_list, *_ = trainer.fit(contexts, target, batch_size)
-trainer.save_plot_image(loss_list, "../img/cbow.png")
+file_path = "../img/cbow.png"
+trainer.save_plot_image(loss_list, file_path)
 
 # Store data to later use
 word_vecs = model.word_vecs

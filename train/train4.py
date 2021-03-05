@@ -70,7 +70,8 @@ plt.figure()
 plt.plot(x, ppl_list, label="train")
 plt.xlabel("Epochs")
 plt.ylabel("Perplexity")
-plt.savefig("../img/rnnlm.png")
+file_path = "../img/rnnlm.png"
+plt.savefig(file_path)
 
 # Corpus size: 1000, Vocabulary size: 418
 # Epoch 1 | Perplexity 405.99

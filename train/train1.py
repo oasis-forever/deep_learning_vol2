@@ -18,4 +18,5 @@ optimizer = SGD(lr=learning_rate)
 
 trainer = Trainer(model, optimizer)
 loss_list, *_ = trainer.fit(x, t, max_epoch, batch_size, eval_interval=10)
-trainer.save_plot_image(loss_list, "../img/training_plot.png")
+file_path = "../img/training_plot.png"
+trainer.save_plot_image(loss_list, file_path)

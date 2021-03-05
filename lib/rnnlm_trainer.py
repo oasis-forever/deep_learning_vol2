@@ -88,7 +88,7 @@ class RNNLMTrainer:
             self.current_epoch += 1
         return training_process
 
-    def save_plot_image(self, path, ylim=None):
+    def save_plot_image(self, file_path, ylim=None):
         plt.figure()
         x = np.arange(len(self.ppl_list))
         if ylim is not None:
@@ -96,4 +96,4 @@ class RNNLMTrainer:
         plt.plot(x, self.ppl_list, label="train")
         plt.xlabel("Iterations (x{})".format(str(self.eval_interval)))
         plt.ylabel("Perplexity")
-        plt.savefig(path)
+        plt.savefig(file_path)

@@ -33,7 +33,8 @@ trainer = RNNLMTrainer(model, optimiser)
 training_process = trainer.fit(xs, ts, max_epoch, batch_size, time_size, max_grad, eval_interval=20)
 for iter in training_process:
     print(iter)
-tainer.save_plot_image("../img/train_rnnlm.png", ylim=(0, 500))
+file_path = "../img/train_rnnlm.png"
+tainer.save_plot_image(file_path, ylim=(0, 500))
 
 # 2. Evaluate by test data
 model.reset_state()

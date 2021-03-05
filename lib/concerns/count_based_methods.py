@@ -96,8 +96,8 @@ class CountBasedMethod:
         U, S, V = np.linalg.svd(M)
         return U
 
-    def save_svd_plot_image(self, word_to_id, U, path):
+    def save_svd_plot_image(self, word_to_id, U, file_path):
         for word, word_id in word_to_id.items():
             plt.annotate(word, (U[word_id, 0], U[word_id, 1]))
         plt.scatter(U[:, 0], U[:, 1], alpha=0.5)
-        plt.savefig(path)
+        plt.savefig(file_path)

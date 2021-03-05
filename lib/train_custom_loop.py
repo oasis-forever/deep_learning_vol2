@@ -51,14 +51,14 @@ class TrainCustomLoop:
                     loss_count = 0
         return loss_list
 
-    def save_plot_image(self, loss_list, path):
+    def save_plot_image(self, loss_list, file_path):
         plt.figure()
         plt.plot(np.arange(len(loss_list)), loss_list, label='train')
         plt.xlabel("iterations (x10)")
         plt.ylabel("loss")
-        plt.savefig(path)
+        plt.savefig(file_path)
 
-    def save_dicision_boundary_image(self, x, t, path, h=0.001):
+    def save_dicision_boundary_image(self, x, t, file_path, h=0.001):
         # Plot boundary
         x_min, x_max = x[:, 0].min() - .1, x[:, 0].max() + .1
         y_min, y_max = x[:, 1].min() - .1, x[:, 1].max() + .1
@@ -80,4 +80,4 @@ class TrainCustomLoop:
                 s=40,
                 marker=markers[i]
             )
-        plt.savefig(path)
+        plt.savefig(file_path)

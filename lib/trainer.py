@@ -88,7 +88,7 @@ class Trainer:
             current_epoch += 1
         return loss_list, training_process
 
-    def save_plot_image(self, loss_list, path, eval_interval=20, ylim=None):
+    def save_plot_image(self, loss_list, file_path, eval_interval=20, ylim=None):
         plt.figure()
         x = np.arange(len(loss_list))
         if ylim is not None:
@@ -96,4 +96,4 @@ class Trainer:
         plt.plot(x, loss_list, label="train")
         plt.xlabel("iterations (x{})".format(str(eval_interval)))
         plt.ylabel("loss")
-        plt.savefig(path)
+        plt.savefig(file_path)
