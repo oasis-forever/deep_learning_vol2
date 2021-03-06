@@ -9,4 +9,6 @@ lib/concerns/ptb.train.txt
 lib/concerns/ptb.test.npy
 lib/concerns/ptb.test.txt
 lib/concerns/ptb.vocab.pkl
+lib/concerns/ptb.valid.npy
+lib/concerns/ptb.valid.txt
 pkl/*
