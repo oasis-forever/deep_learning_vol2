@@ -1,9 +1,8 @@
 import numpy as np
 from softmax import *
-from rnnlm import RNNLM
 from better_rnnlm import BetterRNNLM
 
-class RNNLMGen(RNNLM):
+class RNNLMGen(BetterRNNLM):
     def word_ids_list(self, start_id, skip_ids=None, sample_size=100):
         word_ids = [start_id]
         x = start_id
