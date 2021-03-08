@@ -2,7 +2,6 @@ import unittest
 import numpy as np
 from numpy.testing import assert_array_equal
 import time
-import os.path
 from os import path
 import sys
 sys.path.append("../lib")

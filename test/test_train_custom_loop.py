@@ -1,5 +1,4 @@
 import unittest
-import os.path
 from os import path
 import sys
 sys.path.append("../lib")
