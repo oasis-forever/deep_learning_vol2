@@ -47,15 +47,13 @@ class TestSequence(unittest.TestCase):
 
     def test_load_data(self):
         (x_train, t_train), (x_test, t_test) = self.sequence.load_data(self.file_path)
-        x_train, t_train = (x_train, t_train)
-        x_test, t_test   = (x_test, t_test)
         self.assertEqual((135000, 7), x_train.shape)
         self.assertEqual((135000, 5), t_train.shape)
         self.assertEqual((15000, 7), x_test.shape)
         self.assertEqual((15000, 5), t_test.shape)
 
     def test_get_vocab(self):
-        self.sequence.load_data(self.file_path)
+        (x_train, t_train), (x_test, t_test) = self.sequence.load_data(self.file_path)
         vocab = self.sequence.get_vocab()
         char_to_id, id_to_char = vocab
         self.assertEqual({
@@ -88,6 +86,8 @@ class TestSequence(unittest.TestCase):
             11: "8",
             12: "4"
         }, id_to_char)
+        self.assertEqual("70+174 ", "".join([id_to_char[c] for c in x_train[0]]))
+        self.assertEqual("_244 ", "".join([id_to_char[c] for c in t_train[0]]))
 
 if __name__ == "__main__":
     unittest.main()
