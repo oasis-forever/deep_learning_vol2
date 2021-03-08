@@ -6,11 +6,13 @@ class Sequence:
         self.id_to_char = {}
         self.char_to_id = {}
 
-    def _text_to_dict(self, file_path, questions=[], answers=[]):
-        for line in open(file_path, "r"):
+    def _text_to_dict(self, file_path, questions, answers):
+        lines = open(file_path, "r")
+        for line in lines:
             index = line.find("_")
             questions.append(line[:index])
             answers.append(line[index:-1])
+        lines.close()
         return questions, answers
 
     def _update_vocab(self, text):
@@ -48,7 +50,9 @@ class Sequence:
         if not path.exists(file_path):
             print("No file: %s" % file_path)
             return None
-        questions, answers = self._text_to_dict(file_path)
+        questions = []
+        answers = []
+        questions, answers = self._text_to_dict(file_path, questions, answers)
         self._create_vocab_dict(questions, answers)
         x, t = self._create_numpy_array(questions, answers)
         x, t = self._shuffle_data(x, t, seed)

@@ -8,11 +8,13 @@ class TestSequence(unittest.TestCase):
     def setUp(self):
         self.sequence = Sequence()
         self.file_path = "../texts/addition.txt"
+        self.questions = []
+        self.answers = []
 
     def test_text_to_dict(self):
-        questions, answers = self.sequence._text_to_dict(self.file_path)
-        self.assertEqual(200000, len(questions))
-        self.assertEqual(200000, len(answers))
+        questions, answers = self.sequence._text_to_dict(self.file_path, self.questions, self.answers)
+        self.assertEqual(50000, len(questions))
+        self.assertEqual(50000, len(answers))
 
     def test_update_vocab(self):
         text = "16+75  _91"
@@ -39,7 +41,7 @@ class TestSequence(unittest.TestCase):
         }, self.sequence.id_to_char)
 
     def test_create_numpy_array(self):
-        questions, answers = self.sequence._text_to_dict(self.file_path)
+        questions, answers = self.sequence._text_to_dict(self.file_path, self.questions, self.answers)
         self.sequence._create_vocab_dict(questions, answers)
         x, t = self.sequence._create_numpy_array(questions, answers)
         self.assertEqual((50000, 7), x.shape)
@@ -47,10 +49,10 @@ class TestSequence(unittest.TestCase):
 
     def test_load_data(self):
         (x_train, t_train), (x_test, t_test) = self.sequence.load_data(self.file_path)
-        self.assertEqual((135000, 7), x_train.shape)
-        self.assertEqual((135000, 5), t_train.shape)
-        self.assertEqual((15000, 7), x_test.shape)
-        self.assertEqual((15000, 5), t_test.shape)
+        self.assertEqual((45000, 7), x_train.shape)
+        self.assertEqual((45000, 5), t_train.shape)
+        self.assertEqual((5000, 7), x_test.shape)
+        self.assertEqual((5000, 5), t_test.shape)
 
     def test_get_vocab(self):
         (x_train, t_train), (x_test, t_test) = self.sequence.load_data(self.file_path)
@@ -86,8 +88,8 @@ class TestSequence(unittest.TestCase):
             11: "8",
             12: "4"
         }, id_to_char)
-        self.assertEqual("70+174 ", "".join([id_to_char[c] for c in x_train[0]]))
-        self.assertEqual("_244 ", "".join([id_to_char[c] for c in t_train[0]]))
+        self.assertEqual("71+118 ", "".join([id_to_char[c] for c in x_train[0]]))
+        self.assertEqual("_189 ", "".join([id_to_char[c] for c in t_train[0]]))
 
 if __name__ == "__main__":
     unittest.main()
