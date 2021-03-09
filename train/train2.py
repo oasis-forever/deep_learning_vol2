@@ -27,9 +27,9 @@ model = SimpleCBOW(vocab_size, hidden_size)
 optimiser = Adam()
 trainer = Trainer(model, optimiser)
 
-loss_list, *_ = trainer.fit(contexts, target, max_epoch, batch_size)
+trainer.fit(contexts, target, max_epoch, batch_size)
 file_path = "../img/simple_cbow.png"
-trainer.save_plot_image(loss_list, file_path)
+trainer.save_plot_image(file_path)
 
 word_vecs = model.word_vecs
 for word_id, word in id_to_word.items():

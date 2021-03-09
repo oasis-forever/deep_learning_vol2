@@ -9,6 +9,7 @@ class Trainer:
     def __init__(self, model, optimizer):
         self.model     = model
         self.optimizer = optimizer
+        self.loss_list = []
 
     def _shuffle_data(self, data_size, x, t):
         index = np.random.permutation(data_size)
@@ -64,7 +65,6 @@ class Trainer:
         data_size = len(x)
         max_iters = data_size // batch_size
         start_time = time.time()
-        loss_list = []
         training_process = []
         current_epoch = 0
         for epoch in range(max_epoch):
@@ -83,17 +83,17 @@ class Trainer:
                     avarage_loss, training_status = self._evaluate(total_loss, loss_count, start_time, current_epoch, iters, max_iters)
                     total_loss = 0
                     loss_count = 0
-                    loss_list.append(avarage_loss)
+                    self.loss_list.append(avarage_loss)
                     training_process.append(training_status)
             current_epoch += 1
-        return loss_list, training_process
+        return training_process
 
-    def save_plot_image(self, loss_list, file_path, eval_interval=20, ylim=None):
+    def save_plot_image(self, file_path, eval_interval=20, ylim=None):
         plt.figure()
-        x = np.arange(len(loss_list))
+        x = np.arange(len(self.loss_list))
         if ylim is not None:
             plt.ylim(*ylim)
-        plt.plot(x, loss_list, label="train")
+        plt.plot(x, self.loss_list, label="train")
         plt.xlabel("iterations (x{})".format(str(eval_interval)))
         plt.ylabel("loss")
         plt.savefig(file_path)

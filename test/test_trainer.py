@@ -72,7 +72,7 @@ class TestTrainer(unittest.TestCase):
         self.assertEqual("| epoch 1 |  iter 2 / 9 | time 0[s] | loss 1.10", training_status)
 
     def test_fit(self):
-        loss_list, training_process = self.trainer.fit(self.x, self.t)
+        training_process = self.trainer.fit(self.x, self.t)
         assert_array_equal(np.array([
             1.095670688853155,
             1.166632183444487,
@@ -84,7 +84,7 @@ class TestTrainer(unittest.TestCase):
             1.1263507954471639,
             1.1260232915246664,
             1.1018855740540143
-        ]), np.array(loss_list))
+        ]), np.array(self.trainer.loss_list))
         self.assertEqual([
             "| epoch 1 |  iter 1 / 9 | time 0[s] | loss 1.10",
             "| epoch 2 |  iter 1 / 9 | time 0[s] | loss 1.17",
@@ -99,9 +99,9 @@ class TestTrainer(unittest.TestCase):
         ], training_process)
 
     def test_save_plot_image(self):
-        loss_list, *_ = self.trainer.fit(self.x, self.t, max_epoch=300, batch_size=30)
+        self.trainer.fit(self.x, self.t, max_epoch=300, batch_size=30)
         file_path = "../img/training_plot.png"
-        self.trainer.save_plot_image(loss_list, file_path)
+        self.trainer.save_plot_image(file_path)
         self.assertEqual(True, path.exists(file_path))
 
 if __name__ == "__main__":

@@ -11,6 +11,7 @@ class TrainCustomLoop:
         # Generate model, optimiser
         self.model     = TwoLayerNet(input_size, hidden_size, output_size)
         self.optimizer = SGD(learning_rate)
+        self.loss_list = []
 
     def _shuffle_data(self, x, t):
         data_size = len(x)
@@ -33,7 +34,6 @@ class TrainCustomLoop:
     def update(self, x, t, max_epoch, batch_size):
         data_size = len(x)
         max_iters = data_size // batch_size
-        loss_list = []
         total_loss = 0
         loss_count = 0
         for epoch in range(max_epoch):
@@ -46,14 +46,14 @@ class TrainCustomLoop:
                 loss_count += 1
                 if (iters + 1) % 10 == 0:
                     avarage_loss, *_ = self._learning_process(total_loss, loss_count, epoch, iters, max_iters)
-                    loss_list.append(avarage_loss)
+                    self.loss_list.append(avarage_loss)
                     total_loss = 0
                     loss_count = 0
-        return loss_list
+        return self.loss_list
 
-    def save_plot_image(self, loss_list, file_path):
+    def save_plot_image(self, file_path):
         plt.figure()
-        plt.plot(np.arange(len(loss_list)), loss_list, label='train')
+        plt.plot(np.arange(len(self.loss_list)), self.loss_list, label='train')
         plt.xlabel("iterations (x10)")
         plt.ylabel("loss")
         plt.savefig(file_path)

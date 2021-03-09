@@ -17,6 +17,6 @@ model = TwoLayerNet(input_size=2, hidden_size=hidden_size, output_size=3)
 optimizer = SGD(lr=learning_rate)
 
 trainer = Trainer(model, optimizer)
-loss_list, *_ = trainer.fit(x, t, max_epoch, batch_size, eval_interval=10)
+trainer.fit(x, t, max_epoch, batch_size, eval_interval=10)
 file_path = "../img/training_plot.png"
-trainer.save_plot_image(loss_list, file_path)
+trainer.save_plot_image(file_path)

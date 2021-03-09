@@ -4,6 +4,8 @@ import sys
 sys.path.append("../lib")
 sys.path.append("../lib/concerns")
 sys.path.append("../lib/layers")
+sys.path.append("../lib/models")
+sys.path.append("../lib/optimisers")
 from train_custom_loop import TrainCustomLoop
 from spiral import *
 
@@ -43,9 +45,9 @@ class TestTrainer(unittest.TestCase):
         self.assertEqual(300, len(loss_list))
 
     def test_save_plot_image(self):
-        loss_list = self.train_custom_loop.update(self.x, self.t, self.max_epoch, self.batch_size)
+        self.train_custom_loop.update(self.x, self.t, self.max_epoch, self.batch_size)
         file_path = "../img/train_custom_loop_plot.png"
-        self.train_custom_loop.save_plot_image(loss_list, file_path)
+        self.train_custom_loop.save_plot_image(file_path)
         self.assertEqual(True, path.exists(file_path))
 
     def test_save_dicision_boundary_image(self):

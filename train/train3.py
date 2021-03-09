@@ -29,9 +29,9 @@ optimiser = Adam()
 trainer = Trainer(model, optimiser)
 
 # Initialize training
-loss_list, *_ = trainer.fit(contexts, target, batch_size)
+trainer.fit(contexts, target, batch_size)
 file_path = "../img/cbow.png"
-trainer.save_plot_image(loss_list, file_path)
+trainer.save_plot_image(file_path)
 
 # Store data to later use
 word_vecs = model.word_vecs
