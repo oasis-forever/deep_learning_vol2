@@ -1,6 +1,7 @@
 import sys
 sys.path.append("../lib")
 sys.path.append("../lib/concerns")
+sys.path.append("../lib/models")
 from sgd import SGD
 from trainer import Trainer
 from spiral import *
