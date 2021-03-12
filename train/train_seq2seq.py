@@ -4,6 +4,7 @@ import sys
 sys.path.append("../lib")
 sys.path.append("../lib/concerns")
 sys.path.append("../lib/layers")
+sys.path.append("../lib/models")
 sys.path.append("../lib/optimisers")
 from sequence import Sequence
 from adam import Adam
