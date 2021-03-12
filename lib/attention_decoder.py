@@ -20,11 +20,11 @@ class AttentionDecoder:
         affine_b = np.zeros(V).astype("f")
         self.embed          = TimeEmbedding(embed_w)
         self.lstm           = TimeLSTM(lstm_Wx, lstm_Wh, lstm_b, stateful=True)
-        self.time_attention = TimeAttention()
+        self.attention      = TimeAttention()
         self.affine         = TimeAffine(affine_W, affine_b)
         self.params = []
         self.grads  = []
-        for layer in (self.embed, self.lstm, self.time_attention, self.affine):
+        for layer in (self.embed, self.lstm, self.attention, self.affine):
             self.params += layer.params
             self.grads  += layer.grads
 
