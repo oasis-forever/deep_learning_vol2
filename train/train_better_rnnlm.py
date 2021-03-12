@@ -1,6 +1,8 @@
 import sys
 sys.path.append("../lib")
 sys.path.append("../lib/concerns")
+sys.path.append("../lib/models")
+sys.path.append("../lib/layers")
 sys.path.append("../lib/optimisers")
 from sgd import SGD
 from rnnlm_trainer import RNNLMTrainer
@@ -9,14 +11,14 @@ from ptb import *
 from better_rnnlm import BetterRNNLM
 
 # Hyper parameters
-batch_size = 20
-wordvec_size = 650
-hidden_size = 650
-time_size = 35
+batch_size    = 20
+wordvec_size  = 650
+hidden_size   = 650
+time_size     = 35
 learning_rate = 20.0
-max_epoch = 40
-max_grad = 0.25
-dropout = 0.5
+max_epoch     = 40
+max_grad      = 0.25
+dropout       = 0.5
 
 # Load trainig data
 corpus, word_to_id, id_to_word = load_data("train")
