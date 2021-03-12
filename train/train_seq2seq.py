@@ -9,7 +9,7 @@ from sequence import Sequence
 from adam import Adam
 from eval_seq2seq import *
 from trainer import Trainer
-from peekly_seq2seq import PeekySeq2seq
+from peekly_seq2seq import PeekySeq2Seq
 
 sequence = Sequence()
 (x_train, t_train), (x_test, t_test) = sequence.load_data("../texts/addition.txt")
@@ -29,7 +29,7 @@ max_epoch    = 25
 max_grad     = 5.0
 
 # Generate a model, optimiser and trainer
-model     = PeekySeq2seq(vocab_size, wordvec_size, hidden_size)
+model     = PeekySeq2Seq(vocab_size, wordvec_size, hidden_size)
 optimiser = Adam()
 trainer   = Trainer(model, optimiser)
 
