@@ -1,11 +1,13 @@
 import numpy as np
 import sys
 sys.path.append("./layers")
+sys.path.append("./models")
+from base_model import BaseModel
 from encoder import Encoder
 from decoder import Decoder
 from time_softmax_with_loss import TimeSoftmaxWithLoss
 
-class Seq2Seq:
+class Seq2Seq(BaseModel):
     def __init__(self, vocab_size, wordvec_size, hidden_size):
         V = vocab_size
         D = wordvec_size
