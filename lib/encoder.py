@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-sys.path.append("../layers")
+sys.path.append("./layers")
 from time_embedding import TimeEmbedding
 from time_lstm import TimeLSTM
 
