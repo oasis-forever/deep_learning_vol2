@@ -2,15 +2,17 @@ import sys
 sys.path.append("../lib")
 sys.path.append("../lib/concerns")
 sys.path.append("../lib/models")
+sys.path.append("../lib/layers")
+sys.path.append("../lib/optimisers")
 from sgd import SGD
 from trainer import Trainer
 from spiral import *
 from two_layer_net import TwoLayerNet
 
 # Hyper Parameters
-max_epoch = 300
-batch_size = 30
-hidden_size = 10
+max_epoch     = 300
+batch_size    = 30
+hidden_size   = 10
 learning_rate = 1.0
 
 x, t = load_data()
