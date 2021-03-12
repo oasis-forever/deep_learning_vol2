@@ -3,6 +3,7 @@ import sys
 sys.path.append("./layers")
 from attention_encoder import AttentionEncoder
 from attention_decoder import AttentionDecoder
+from time_softmax_with_loss import TimeSoftmaxWithLoss
 from seq2seq import Seq2Seq
 
 class AttentionSeq2Seq(Seq2Seq):
