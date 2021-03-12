@@ -1,5 +1,5 @@
 import numpy as np
-from softmax import *
+import sys
 from better_rnnlm import BetterRNNLM
 
 class RNNLMGen(BetterRNNLM):
@@ -9,7 +9,7 @@ class RNNLMGen(BetterRNNLM):
         while len(word_ids) < sample_size:
             x = np.array(x).reshape(1, 1)
             score = self._predict(x)
-            p = softmax(score.flatten())
+            p = self.softmax.calc_softmax(score.flatten())
             sampled = np.random.choice(len(p), size=1, p=p)
             if (skip_ids is None) or (sampled not in skip_ids):
                 x = sampled

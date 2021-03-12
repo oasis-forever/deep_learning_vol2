@@ -1,7 +1,7 @@
 import numpy as np
 import sys
 sys.path.append("../concerns")
-from softmax import *
+from softmax import Softmax
 
 class TimeSoftmaxWithLoss:
     def __init__(self):
@@ -9,6 +9,7 @@ class TimeSoftmaxWithLoss:
         self.grads  = []
         self.cache  = None
         self.ignore_label = -1
+        self.softmax = Softmax()
 
     def forward(self, xs, ts):
         N, T, V = xs.shape
@@ -18,7 +19,7 @@ class TimeSoftmaxWithLoss:
         xs = xs.reshape(N * T, V)
         ts = ts.reshape(N * T)
         mask = mask.reshape(N * T)
-        ys = softmax(xs)
+        ys = self.softmax.calc_softmax(xs)
         ls = np.log(ys[np.arange(N * T), ts])
         ls *= mask
         loss = -np.sum(ls)

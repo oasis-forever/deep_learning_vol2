@@ -1,7 +1,7 @@
 import numpy as np
 import sys
 sys.path.append("../concerns")
-from softmax import *
+from softmax import Softmax
 from cross_entropy_error import *
 
 class SoftMaxWithLoss:
@@ -10,10 +10,11 @@ class SoftMaxWithLoss:
         self.grads  = []
         self.y = None
         self.t = None
+        self.softmax = Softmax()
 
     def forward(self, x, t):
         self.t = t
-        self.y = softmax(x)
+        self.y = self.softmax.calc_softmax(x)
         if self.t.size == self.y.size:
             self.t = self.t.argmax(axis=1)
         loss = cross_entropy_error(self.y, self.t)

@@ -26,7 +26,7 @@ class TestBetterRNNLM(unittest.TestCase):
             [0, 1, 0, 0],
             [0, 0, 0, 1]
         ])
-        self.file_path = "../pkl/better_better_rnnlm.pkl"
+        self.file_path = "../pkl/better_rnnlm.pkl"
 
     def test_predict(self):
         score = self.better_rnnlm._predict(self.xs)

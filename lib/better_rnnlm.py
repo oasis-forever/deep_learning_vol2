@@ -8,6 +8,7 @@ from time_affine import TimeAffine
 from time_embedding import TimeEmbedding
 from time_dropout import TimeDropout
 from time_lstm import TimeLSTM
+from softmax import Softmax
 from time_softmax_with_loss import TimeSoftmaxWithLoss
 
 class BetterRNNLM(BaseModel):
@@ -36,6 +37,7 @@ class BetterRNNLM(BaseModel):
             TimeAffine(embed_W.T, affine_b)
         ]
         self.loss_layer     = TimeSoftmaxWithLoss()
+        self.softmax        = Softmax()
         self.lstm_layers    = [self.layers[2], self.layers[4]]
         self.dropout_layers = [self.layers[1], self.layers[3], self.layers[5]]
         #Integrate all weight and gradients to a list each

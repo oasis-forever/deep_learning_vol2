@@ -4,8 +4,7 @@ import numpy as np
 
 class BaseModel:
     def __init__(self):
-        self.params = None
-        self.grads  = None
+        pass
 
     def forward(self, *args):
         raise NotImplementedError
@@ -30,5 +29,5 @@ class BaseModel:
         with open(file_path, "rb") as f:
             params = pickle.load(f)
         params = [p.astype("f") for p in params]
-        for i, param in enumerate(self.params):
+        for i, param in enumerate(params):
             param[...] = params[i]
