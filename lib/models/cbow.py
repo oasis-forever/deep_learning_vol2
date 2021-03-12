@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-sys.path.append("./layers")
+sys.path.append("../layers")
 from embedding import Embedding
 from negative_sampling_loss import NegativeSamplingLoss
 

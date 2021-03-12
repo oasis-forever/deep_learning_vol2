@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-sys.path.append("./layers")
+sys.path.append("../layers")
 from matmul import MatMul
 from softmax_with_loss import SoftMaxWithLoss
 
