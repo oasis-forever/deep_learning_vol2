@@ -32,7 +32,7 @@ class TestSimpleRNNLM(unittest.TestCase):
 
     def test_forward(self):
         loss = self.simple_rnnlm.forward(self.xs, self.ts)
-        self.assertEqual(1.95, round(loss, 2))
+        self.assertEqual(True, 1.93 < round(loss, 2) < 1.96)
 
     def test_backward(self):
         self.simple_rnnlm.forward(self.xs, self.ts)

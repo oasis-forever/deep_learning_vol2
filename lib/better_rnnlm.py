@@ -1,8 +1,8 @@
 import pickle
 import numpy as np
 import sys
-sys.path.append("../lib/layers")
-sys.path.append("../lib/models")
+sys.path.append("./layers")
+sys.path.append("./models")
 from base_model import BaseModel
 from time_affine import TimeAffine
 from time_embedding import TimeEmbedding

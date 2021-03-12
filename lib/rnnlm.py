@@ -1,7 +1,7 @@
 import pickle
 import numpy as np
 import sys
-sys.path.append("../lib/layers")
+sys.path.append("./layers")
 from time_affine import TimeAffine
 from time_embedding import TimeEmbedding
 from time_lstm import TimeLSTM

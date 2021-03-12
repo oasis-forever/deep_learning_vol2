@@ -2,9 +2,10 @@ import unittest
 import numpy as np
 from os import path
 import sys
-sys.path.append("../lib/")
+sys.path.append("../lib")
 sys.path.append("../lib/concerns")
 sys.path.append("../lib/layers")
+sys.path.append("../lib/models")
 from better_rnnlm import BetterRNNLM
 from count_based_methods import CountBasedMethod
 
