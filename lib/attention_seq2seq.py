@@ -7,9 +7,7 @@ from seq2seq import Seq2Seq
 
 class AttentionSeq2Seq(Seq2Seq):
     def __init__(self, vocab_size, wordvec_size, hidden_size):
-        V = vocab_size
-        D = wordvec_size
-        H = hidden_size
+        args = vocab_size, wordvec_size, hidden_size
         self.encoder = AttentionEncoder(*args)
         self.decoder = AttentionDecoder(*args)
         self.softmax = TimeSoftmaxWithLoss()
