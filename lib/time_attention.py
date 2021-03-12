@@ -3,6 +3,8 @@ from attention import Attention
 
 class TimeAttention:
     def __init__(self):
+        self.params            = []
+        self.grads             = []
         self.layers            = []
         self.attention_weights = []
 
