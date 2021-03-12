@@ -7,7 +7,7 @@ class WeightSum:
     def forward(self, hs, a):
         N, T, H = hs.shape
         ar = a.reshape(N, T, 1).repeat(H, axis=2)
-        t = hs + ar
+        t = hs * ar
         c = np.sum(t, axis=1)
         self.cache = (hs, ar)
         return c
