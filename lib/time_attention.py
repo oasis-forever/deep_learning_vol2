@@ -10,7 +10,7 @@ class TimeAttention:
 
     def forward(self, hs_enc, hs_dec):
         N, T, H = hs_dec.shape
-        out = np.zeros_like(hs_dec)
+        out = np.empty_like(hs_dec)
         for t in range(T):
             layer = Attention()
             out[:, t, :] = layer.forward(hs_enc, hs_dec[:, t, :])
