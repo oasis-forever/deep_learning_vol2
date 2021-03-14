@@ -19,7 +19,8 @@ char_to_id, id_to_char = sequence.get_vocab()
 # Reverse input?
 is_reverse = False  # True
 if is_reverse:
-    x_train, x_test = x_train[:, ::-1], x_test[:, ::-1]
+    x_train = x_train[:, ::-1]
+    x_test  = x_test[:, ::-1]
 
 # Hyper parameters
 vocab_size   = len(char_to_id)
@@ -39,8 +40,9 @@ for epoch in range(max_epoch):
     trainer.fit(x_train, t_train, max_epoch=1, batch_size=batch_size, max_grad=max_grad)
     correct_num = 0
     for i in range(len(x_test)):
-        question, correct = x_test[[i]], t_test[[i]]
-        verbose = i < 10
+        question = x_test[[i]]
+        correct  = t_test[[i]]
+        verbose  = i < 10
         correct_num += eval_seq2seq(model, question, correct, id_to_char, verbose, is_reverse)
     acc = float(correct_num) / len(x_test)
     acc_list.append(acc)
