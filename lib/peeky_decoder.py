@@ -12,10 +12,10 @@ class PeekyDecoder:
         H = hidden_size
         rn = np.random.randn
         embed_w = (rn(V, D) / 100).astype("f")
-        lstm_Wx = (rn(H + D, 4 * H) / np.sqrt(D)).astype("f")
+        lstm_Wx = (rn(H + D, 4 * H) / np.sqrt(H + D)).astype("f")
         lstm_Wh = (rn(H, 4 * H) / np.sqrt(H)).astype("f")
         lstm_b  = np.zeros(4 * H).astype("f")
-        affine_W = (rn(H + H, V) / np.sqrt(H)).astype("f")
+        affine_W = (rn(H + H, V) / np.sqrt(H + H)).astype("f")
         affine_b = np.zeros(V).astype("f")
         self.embed  = TimeEmbedding(embed_w)
         self.lstm   = TimeLSTM(lstm_Wx, lstm_Wh, lstm_b, stateful=True)
