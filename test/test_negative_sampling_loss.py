@@ -46,9 +46,9 @@ class TestNegativeSamplingLoss(unittest.TestCase):
         self.nsl.forward(self.h, self.target)
         dh = self.nsl.backward()
         assert_array_equal(np.array([
-            [0. ,  1.6,  3.3],
-            [5. ,  6.7,  8.3],
-            [10., 11.7, 13.3]
+            [14. , 15.7, 17.3],
+            [12. , 13.7, 15.3],
+            [17. , 18.7, 20.3]
         ]), np.round(dh, decimals=1))
 
 if __name__ == "__main__":

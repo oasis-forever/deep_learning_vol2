@@ -38,7 +38,7 @@ class TestTrainer(unittest.TestCase):
         data_size = len(self.x)
         max_iters = data_size // self.batch_size
         *_, process = self.train_custom_loop._learning_process(self.total_loss, self.loss_count, epoch, iters, max_iters)
-        self.assertEqual("| epoch 10 | iter 10 / 10 | loss 1.10", process)
+        self.assertEqual("| epoch 10 | iter 10 / 10 | loss 1.07", process)
 
     def test_update(self):
         loss_list = self.train_custom_loop.update(self.x, self.t, self.max_epoch, self.batch_size)
