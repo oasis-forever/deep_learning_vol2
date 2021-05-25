@@ -2,7 +2,7 @@
 
 * WSL(Ubuntu 20.04.1 LTS (GNU/Linux 4.19.128-microsoft-standard x86_64))
 * pyenv 1.2.27
-* Python 3.8.9
+* Python 3.8.10
 
 ## 2. Reference
 
